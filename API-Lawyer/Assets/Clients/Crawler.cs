@@ -1,8 +1,8 @@
-﻿using API_Lawyer.Model;
+﻿using Castle.Core.Internal;
 using HtmlAgilityPack;
-using System.Net;
+using Newtonsoft.Json;
 using System.Text;
-using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace API_Lawyer.Assets.Client
 {
@@ -15,76 +15,45 @@ namespace API_Lawyer.Assets.Client
             _httpClient = new HttpClient();
         }
 
-        public async Task<string> GetHtmlAsync(string url)
+        public async Task<Dictionary<string, string>> BaixarPagina(string numeroProcesso)
         {
-            var response = await _httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-            var html = await response.Content.ReadAsStringAsync();
-            return html;
+            var url = GerarLink(numeroProcesso);
+
+            using (var httpClient = new HttpClient())
+            {
+                var httpResponse = await httpClient.GetAsync(url);
+                var htmlBytes = await httpResponse.Content.ReadAsByteArrayAsync();
+                var htmlString = Encoding.GetEncoding("iso-8859-1").GetString(htmlBytes);
+
+                var htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(htmlString);
+
+                var result = new Dictionary<string, string>();
+
+                var nuProcessoNodes = htmlDocument.DocumentNode.SelectNodes("//td");
+
+                if (nuProcessoNodes != null)
+                {
+                    int counter = 1;
+                    foreach (var node in nuProcessoNodes)
+                    {
+                        string key = $"Info_{counter}";
+                        string value = Regex.Replace(Regex.Replace(Regex.Replace(node.InnerText, @"\s+", " ").Trim(), "&gt;", "").Trim(), "&nbsp;", "").Trim();
+                        if (!string.IsNullOrEmpty(value) && !result.ContainsValue(value))
+                        {
+                            result.Add(key, value);
+                            counter++;
+                        }
+                    }
+                }
+
+                //string jsonResult = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+                return result;
+            }
         }
 
-        public Processo ExtractData(string html)
-        {
-            Uri url = new Uri("http://esaj.tjba.jus.br/cpo/sg/search.do?paginaConsulta=1&cbPesquisa=NUMPROC&tipoNuProcesso=UNIFICADO&numeroDigitoAnoUnificado=0809979-67.2015&foroNumeroUnificado=0080&dePesquisaNuUnificado=0809979-67.2015.8.05.0080&dePesquisa=&pbEnviar=Pesquisar");
-            WebClient client = new WebClient();
-            client.Encoding = Encoding.UTF8;
-            string htmlString = client.DownloadString(url);
-            HtmlDocument doc23 = new HtmlDocument();
-            doc23.LoadHtml(htmlString);
-            HtmlNode body23 = doc23.DocumentNode.Element("//body");
-            Console.WriteLine(body23);
-
-            Console.WriteLine("\n------HTML-----\n" + html);
-
-
-            // Localizar a tabela que contém o valor do processo
-
-
-
-            // Extrair número do processo
-            //processo.Processo = doc.DocumentNode.SelectSingleNode("//span[@id='Processo']").InnerText;
-
-            // Extrair classe
-            //processo.Classe = doc.DocumentNode.SelectSingleNode("//span[@id='Classe']").InnerText;
-
-            // Extrair assunto
-            //processo.Assunto = doc.DocumentNode.SelectSingleNode("//span[@id='Relator']").InnerText;
-
-            // Extrair partes
-            //processo.Partes = new List<ParteModel>();
-            //var partesNodes = doc.DocumentNode.SelectNodes("//div[@class='Destino']");
-            //foreach (var node in partesNodes)
-            //{
-            //var parte = new ParteModel();
-            //parte.Nome = node.SelectSingleNode("h3").InnerText;
-            //parte.Tipo = node.SelectSingleNode("span[@class='tipoParte']").InnerText;
-            //processo.Partes.Add(parte);
-            //}
-
-            // Extrair andamentos
-            //processo.Andamentos = new List<AndamentoModel>();
-            //var andamentosNodes = doc.DocumentNode.SelectNodes("//div[@class='andamentoProcesso']");
-            //foreach (var node in andamentosNodes)
-            //{
-            //var andamento = new AndamentoModel();
-            //andamento.Data = node.SelectSingleNode("span[@class='data']").InnerText;
-            //andamento.Descricao = node.SelectSingleNode("span[@class='descricao']").InnerText;
-            //processo.Andamentos.Add(andamento);
-            //}
-
-            return null;
-        }
-
-        public string SerializeToJson(Processo processo)
-        {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            var json = JsonSerializer.Serialize(processo, options);
-            return json;
-
-        }
-
-
-        public string GerarLinkEsaj(string numeroProcesso)
+        public string GerarLink(string numeroProcesso)
         {
             string numeroUnificado = numeroProcesso.Substring(0, 15);
             string foro = numeroProcesso.Substring(21);
@@ -100,10 +69,7 @@ namespace API_Lawyer.Assets.Client
             url += "&dePesquisa=";
             url += "&pbEnviar=Pesquisar";
 
-            Console.WriteLine("\nNumeroUnificado: [" + numeroUnificado + "]\nForo: [" + foro + "]\nLink<" + url + ">");
-
             return url;
         }
-
     }
 }
