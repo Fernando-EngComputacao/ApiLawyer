@@ -10,21 +10,21 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 
 ## ⚙️ Funcionalidades
 
-- [ ] CRUD do Processo 
-- [ ] CRUD da Movimentação;
-- [ ] CRUD da Origem;
+- [x] CRUD do Processo 
+- [x] CRUD da Movimentação;
+- [x] CRUD da Origem;
 - [x] Crawler do Site Tribunal de Justiça do Estado da Bahia
-- [ ] Integração dos CRUDs com a base de dados
+- [x] Integração dos CRUDs com a base de dados
 - [ ] Integração do Crawler com a base de dados
 
 ---
 
 ## :1st_place_medal: Envolvimento do projeto
-- [ ] Implementação de CRUD;
+- [x] Implementação de CRUD;
 - [x] Documentação da API em Swagger;
-- [ ] Usabilidade do DbContext para escrita;
-- [ ] Implementação de relacionamento: 1-1, 1-n e n-n;
-- [ ] Atuação de tipos de consultas com LINQ;
+- [x] Usabilidade do DbContext para escrita;
+- [x] Implementação de relacionamento: 1-n e n-n;
+- [x] Atuação de tipos de consultas com LINQ;
 - [x] Utilização de Crawler
 
 --- 
@@ -65,7 +65,7 @@ Exemplo:
 ###### - Após criada a Migratoion, use o comando abaixo para atualizar a base de dados:
 
     Update-Database
-    
+        
 ###### - Outros comandos úteis para Migrations
  - List-Migrations: lista todas as migrações existentes.
  - Script-Migration: gera um script SQL para uma migração específica.
