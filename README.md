@@ -11,16 +11,9 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 ## ⚙️ Funcionalidades
 
 - [ ] CRUD do Processo 
-- [ ] CRUD das Partes do Processo;
 - [ ] CRUD da Movimentação;
-- [ ] CRUD da Petição;
-- [ ] CRUD do Julgamento;
-- [ ] CRUD dos Recursos;
-- [ ] CRUD do Relacionado;
-- [ ] CRUD da Última Carga;
 - [ ] CRUD da Origem;
-- [ ] CRUD da Destino;
-- [ ] Crawler do Site Tribunal de Justiça do Estado da Bahia
+- [x] Crawler do Site Tribunal de Justiça do Estado da Bahia
 - [ ] Integração dos CRUDs com a base de dados
 - [ ] Integração do Crawler com a base de dados
 
@@ -32,7 +25,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 - [ ] Usabilidade do DbContext para escrita;
 - [ ] Implementação de relacionamento: 1-1, 1-n e n-n;
 - [ ] Atuação de tipos de consultas com LINQ;
-- [ ] Utilização de Crawler
+- [x] Utilização de Crawler
 
 --- 
 
@@ -53,11 +46,11 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
   
 ---
 
-## :arrows_clockwise: Adicionais:
+## :star: Orientações Adicionais
 #### Orientações Adicionais
 ###### - Ainda a ser inseridas ...
 
-    teste de destaque de texto    
+    teste de destaque de texto 
 
 ---
 
