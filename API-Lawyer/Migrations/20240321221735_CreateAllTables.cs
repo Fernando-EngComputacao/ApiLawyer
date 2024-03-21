@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API_Lawyer.Migrations
 {
-    public partial class AllTables : Migration
+    public partial class CreateAllTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -67,7 +67,7 @@ namespace API_Lawyer.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Ativo = table.Column<int>(type: "int", nullable: false),
-                    ProcessoId = table.Column<int>(type: "int", nullable: true)
+                    ProcessoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,7 +76,8 @@ namespace API_Lawyer.Migrations
                         name: "FK_Movimentacoes_Processos_ProcessoId",
                         column: x => x.ProcessoId,
                         principalTable: "Processos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -85,7 +86,9 @@ namespace API_Lawyer.Migrations
                 columns: table => new
                 {
                     ProcessoId = table.Column<int>(type: "int", nullable: false),
-                    OrigemId = table.Column<int>(type: "int", nullable: false)
+                    OrigemId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Ativo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -34,6 +34,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<OrigemService>();
 builder.Services.AddScoped<MovimentacaoService>();
 builder.Services.AddScoped<ProcessoService>();
+builder.Services.AddScoped<TransicaoService>();
 
 var app = builder.Build();
 

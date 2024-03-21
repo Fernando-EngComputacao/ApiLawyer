@@ -36,6 +36,7 @@ namespace API_Lawyer.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<int?>("ProcessoId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -113,6 +114,12 @@ namespace API_Lawyer.Migrations
                     b.Property<int?>("ProcessoId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Ativo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.HasKey("OrigemId", "ProcessoId");
 
                     b.HasIndex("ProcessoId");
@@ -124,7 +131,9 @@ namespace API_Lawyer.Migrations
                 {
                     b.HasOne("API_Lawyer.Model.Processo", "Processo")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("ProcessoId");
+                        .HasForeignKey("ProcessoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Processo");
                 });

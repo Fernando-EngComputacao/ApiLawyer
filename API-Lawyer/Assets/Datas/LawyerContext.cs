@@ -26,6 +26,11 @@ namespace API_Lawyer.Assets.Data
                 .WithMany(processo => processo.Transicoes)
                 .HasForeignKey(transicao => transicao.ProcessoId);
 
+            builder.Entity<Movimentacao>()
+                .HasOne(movimentacao => movimentacao.Processo)
+                .WithMany(processo => processo.Movimentacoes)
+                .HasForeignKey(movimentacao => movimentacao.ProcessoId);
+
         }
 
         public DbSet<Processo> Processos { get; set; }
