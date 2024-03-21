@@ -52,4 +52,12 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
   
 ---
 
+## :arrows_clockwise: Adicionais:
+#### Orientações Adicionais
+###### - Ainda a ser inseridas ...
+
+    teste de destaque de texto    
+
+---
+
 ####  :sunglasses: Autor: Fernando Furtado (2024)
