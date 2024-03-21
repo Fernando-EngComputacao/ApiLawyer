@@ -1,5 +1,6 @@
 using API_Lawyer.Assets.Client;
 using API_Lawyer.Assets.Data;
+using API_Lawyer.Assets.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,10 +25,13 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;
     options.JsonSerializerOptions.PropertyNamingPolicy = null;
 });
-builder.Services.AddTransient<Crawler>();
+builder.Services.AddTransient<CrawlerClient>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// To use Service
+builder.Services.AddScoped<OrigemService>();
 
 var app = builder.Build();
 

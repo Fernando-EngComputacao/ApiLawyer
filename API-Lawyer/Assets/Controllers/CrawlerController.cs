@@ -13,8 +13,8 @@ namespace API_Lawyer.Assets.Controllers
     [Route("[controller]")]
     public class CrawlerController : ControllerBase
     {
-        private readonly Crawler _crawler;
-        public CrawlerController(Crawler crawler)
+        private readonly CrawlerClient _crawler;
+        public CrawlerController(CrawlerClient crawler)
         {
             _crawler = crawler;
         }

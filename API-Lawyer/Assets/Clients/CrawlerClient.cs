@@ -6,11 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace API_Lawyer.Assets.Client
 {
-    public class Crawler
+    public class CrawlerClient
     {
         private readonly HttpClient _httpClient;
 
-        public Crawler()
+        public CrawlerClient()
         {
             _httpClient = new HttpClient();
         }
