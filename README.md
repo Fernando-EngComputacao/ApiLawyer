@@ -47,7 +47,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 ---
 
 ## :bar_chart: Diagrama de Classe de Dados
-####  - Diagrama de classe para banco de dados do projeto API-Lawyer, acesse-o [aqui](https://github.com/Fernando-EngComputacao/ApiLawyer/blob/dev/API-Lawyer/Assets/Diagram/Lawyer-dev.pdf).
+####  - Diagrama de classe para banco de dados do projeto API-Lawyer, acesse-o [aqui](https://github.com/Fernando-EngComputacao/ApiLawyer/blob/dev/API-Lawyer/Assets/Diagrams/Lawyer-dev.pdf).
 
 
 ---
