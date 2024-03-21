@@ -54,9 +54,24 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 
 ## :star: Orientações Adicionais
 #### Orientações Adicionais
-###### - Ainda a ser inseridas ...
+###### - Para criar as Migratoions, use o comando abaixo:
 
-    teste de destaque de texto 
+    Add-Migration <NomeDaMigration>
+
+Exemplo: 
+
+    Add-Migration CriacaoTabelaUsuario
+
+###### - Após criada a Migratoion, use o comando abaixo para atualizar a base de dados:
+
+    Update-Database
+    
+###### - Outros comandos úteis para Migrations
+ - List-Migrations: lista todas as migrações existentes.
+ - Script-Migration: gera um script SQL para uma migração específica.
+ - Remove-Migration: remove uma migração específica.
+ - Update-Database -TargetMigration: aplica migrações até um ponto específico.
+
 
 ---
 

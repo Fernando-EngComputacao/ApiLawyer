@@ -1,11 +1,22 @@
 using API_Lawyer.Assets.Client;
+using API_Lawyer.Assets.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Database
+var connectionStringLawyer = builder.Configuration.GetConnectionString(("LawyerConnection"));
+builder.Services.AddDbContext<LawyerContext>(
+    opts =>
+    {
+        opts.UseMySql(connectionStringLawyer, ServerVersion.AutoDetect(connectionStringLawyer));
+    }
+);
 
+// To use AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 builder.Services.AddControllers().AddJsonOptions(options =>
