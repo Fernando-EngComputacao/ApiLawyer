@@ -1,7 +1,5 @@
 ﻿using API_Lawyer.Assets.Model.Origem.dto;
 using API_Lawyer.Assets.Services;
-using API_Lawyer.Assets.Services.Interfaces;
-using API_Lawyer.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Lawyer.Assets.Controllers
@@ -28,7 +26,7 @@ namespace API_Lawyer.Assets.Controllers
         [HttpGet]
         public async Task<IActionResult> GetLoficDeletionOrigensAsync([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
-            var result = await _origemService.GetLoficDeletionOrigensAsync(skip, take);
+            var result = await _origemService.GetLogicDeletionOrigensAsync(skip, take);
             return result != null ? Ok(result) : NotFound();
         }
 

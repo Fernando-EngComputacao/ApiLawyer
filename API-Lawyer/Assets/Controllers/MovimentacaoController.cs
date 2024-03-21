@@ -1,8 +1,5 @@
-﻿using API_Lawyer.Assets.Data;
-using API_Lawyer.Assets.Model.Movimentacao.dto;
-using API_Lawyer.Model;
-using AutoMapper;
-using Microsoft.AspNetCore.JsonPatch;
+﻿using API_Lawyer.Assets.Model.Movimentacao.dto;
+using API_Lawyer.Assets.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Lawyer.Assets.Controllers
@@ -11,95 +8,62 @@ namespace API_Lawyer.Assets.Controllers
     [Route("[controller]")]
     public class MovimentacaoController : ControllerBase
     {
-        private LawyerContext _context;
-        private IMapper _mapper;
+        private readonly MovimentacaoService _movimentacaoService;
 
-        public MovimentacaoController(LawyerContext context, IMapper mapper)
+        public MovimentacaoController(MovimentacaoService movimentacaoService)
         {
-            _context = context;
-            _mapper = mapper;
+            _movimentacaoService = movimentacaoService;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult registerMovimentacao([FromBody] CreateMovimentacaoDTO dto)
+        public async Task<IActionResult> CreateMovimentacao([FromBody] CreateMovimentacaoDTO dto)
         {
-            Movimentacao movimentacao = _mapper.Map<Movimentacao>(dto);
-            movimentacao.Ativo = 1;
-            _context.Movimentacoes.Add(movimentacao);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(recoverMovimentacaoById), new { id = movimentacao.Id }, movimentacao);
+            var createdMovimentacao = await _movimentacaoService.CreateMovimentacaoAsync(dto);
+            return CreatedAtAction(nameof(GetMovimentacaoById), new { id = createdMovimentacao.Id }, createdMovimentacao);
         }
 
-        /// <summary> Busca a lista inteira de Origens</summary>
         [HttpGet]
-        public IEnumerable<ReadMovimentacaoDTO> recoverAllMovimentacao([FromQuery] int skip = 0, [FromQuery] int take = 10)
+        public async Task<IActionResult> GetLoficDeletionMovimentacoesAsync([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
-            return _mapper.Map<List<ReadMovimentacaoDTO>>(_context.Movimentacoes.Where(movimentacao => movimentacao.Ativo == 1).Skip(skip).Take(take).ToList());
-
+            var result = await _movimentacaoService.GetLogicDeletionMovimentacoesAsync(skip, take);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpGet("/Movimentacao/All")]
-        public IEnumerable<ReadMovimentacaoDTO> recoverMovimentacao([FromQuery] int skip = 0, [FromQuery] int take = 10)
+        public async Task<IActionResult> GetAllMovimentacoes([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
-            return _mapper.Map<List<ReadMovimentacaoDTO>>(_context.Movimentacoes.Skip(skip).Take(take).ToList());
-
+            var result = await _movimentacaoService.GetAllMovimentacoesAsync(skip, take);
+            return result != null ? Ok(result) : NotFound();
         }
 
-
         [HttpGet("{id}")]
-        public IActionResult recoverMovimentacaoById(long id)
+        public async Task<IActionResult> GetMovimentacaoById(long id)
         {
-            var result = _context.Origens.FirstOrDefault(movimentacao => movimentacao.Id == id);
-            return (result != null ? Ok(_mapper.Map<ReadMovimentacaoDTO>(result)) : NotFound());
+            var movimentacao = await _movimentacaoService.GetMovimentacaoByIdAsync(id);
+            return movimentacao != null ? Ok(movimentacao) : NotFound();
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult UpdateMovimentacao(int id, [FromBody] UpdateMovimentacaoDTO dto)
+        public async Task<IActionResult> UpdateMovimentacao(int id, [FromBody] UpdateMovimentacaoDTO dto)
         {
-            Movimentacao movimentacao = _context.Movimentacoes.FirstOrDefault(movimentacao => movimentacao.Id == id);
-            if (movimentacao == null) return NotFound();
-            _mapper.Map(dto, movimentacao);
-            _context.SaveChanges();
-            return NoContent();
-        }
-
-        [HttpPatch("{id}")]
-        public IActionResult UpdatePatchMovimentacao(int id, JsonPatchDocument<UpdateMovimentacaoDTO> patch)
-        {
-            Movimentacao movimentacao = _context.Movimentacoes.FirstOrDefault(movimentacao => movimentacao.Id == id);
-            if (movimentacao == null) return NotFound();
-
-            var toUpdateMovimentacao = _mapper.Map<UpdateMovimentacaoDTO>(movimentacao);
-            patch.ApplyTo(toUpdateMovimentacao, ModelState);
-            if (!TryValidateModel(toUpdateMovimentacao)) return ValidationProblem(ModelState);
-
-            _mapper.Map(toUpdateMovimentacao, movimentacao);
-            _context.SaveChanges();
-            return NoContent();
+            var result = await _movimentacaoService.UpdateMovimentacaoAsync(id, dto);
+            return result == null ? NotFound() : NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult RemoveMovimentacao(int id)
+        public async Task<IActionResult> DeleteMovimentacao(int id)
         {
-            Movimentacao movimentacao = _context.Movimentacoes.FirstOrDefault(movimentacao => movimentacao.Id == id);
-            if (movimentacao == null) return NotFound();
-            _context.Remove(movimentacao);
-            _context.SaveChanges();
-            return NoContent();
+            var result = await _movimentacaoService.DeleteMovimentacaoAsync(id);
+            return result == null ? NotFound() : NoContent();
         }
 
         [HttpDelete("/Movimentacao/Logic/{id}")]
-        public IActionResult RemoveLogicalMovimentacao(int id)
+        public async Task<IActionResult> LogicalDeleteMovimentacao(int id)
         {
-            Movimentacao movimentacao = _context.Movimentacoes.FirstOrDefault(movimentacao => movimentacao.Id == id);
-            if (movimentacao == null) return NotFound();
-            movimentacao.Ativo = 0;
-            _context.SaveChanges();
-            return NoContent();
+            var result = await _movimentacaoService.LogicalDeleteMovimentacaoAsync(id);
+            return result == null ? NotFound() : NoContent();
         }
-
-
     }
 }

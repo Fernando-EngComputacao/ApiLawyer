@@ -9,7 +9,7 @@ namespace API_Lawyer.Assets.Services.Interfaces
     {
         Task<ReadOrigemDTO> CreateOrigemAsync(CreateOrigemDTO dto);
         Task<IEnumerable<ReadOrigemDTO>> GetAllOrigensAsync(int skip = 0, int take = 10);
-        Task<IEnumerable<ReadOrigemDTO>> GetLoficDeletionOrigensAsync(int skip = 0, int take = 10);
+        Task<IEnumerable<ReadOrigemDTO>> GetLogicDeletionOrigensAsync(int skip = 0, int take = 10);
         Task<ReadOrigemDTO> GetOrigemByIdAsync(long id);
         Task<Origem> UpdateOrigemAsync(int id, UpdateOrigemDTO dto);
         Task<Origem> DeleteOrigemAsync(int id);

@@ -33,7 +33,7 @@ namespace API_Lawyer.Assets.Services
             return _mapper.Map<List<ReadOrigemDTO>>(await _context.Origens.Skip(skip).Take(take).ToListAsync());
         }
 
-        public async Task<IEnumerable<ReadOrigemDTO>> GetLoficDeletionOrigensAsync(int skip = 0, int take = 10)
+        public async Task<IEnumerable<ReadOrigemDTO>> GetLogicDeletionOrigensAsync(int skip = 0, int take = 10)
         {
             return _mapper.Map<List<ReadOrigemDTO>>(await _context.Origens.Where(origem => origem.Ativo == 1).Skip(skip).Take(take).ToListAsync());
         }
