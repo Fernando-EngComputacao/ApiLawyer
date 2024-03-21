@@ -33,6 +33,7 @@ builder.Services.AddSwaggerGen();
 // To use Service
 builder.Services.AddScoped<OrigemService>();
 builder.Services.AddScoped<MovimentacaoService>();
+builder.Services.AddScoped<ProcessoService>();
 
 var app = builder.Build();
 

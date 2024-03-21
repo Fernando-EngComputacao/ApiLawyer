@@ -1,5 +1,7 @@
 ﻿using API_Lawyer.Assets.Data;
 using API_Lawyer.Assets.Model.Processo.dto;
+using API_Lawyer.Assets.Model.Processo.dto;
+using API_Lawyer.Assets.Services;
 using API_Lawyer.Model;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
@@ -11,93 +13,62 @@ namespace API_Lawyer.Assets.Controllers
     [Route("[controller]")]
     public class ProcessoController : ControllerBase
     {
-        private LawyerContext _context;
-        private IMapper _mapper;
+        private readonly ProcessoService _processoService;
 
-        public ProcessoController(LawyerContext context, IMapper mapper)
+        public ProcessoController(ProcessoService processoService)
         {
-            _context = context;
-            _mapper = mapper;
+            _processoService = processoService;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult registerProcesso([FromBody] CreateProcessoDTO dto)
+        public async Task<IActionResult> CreateProcesso([FromBody] CreateProcessoDTO dto)
         {
-            Processo processo = _mapper.Map<Processo>(dto);
-            processo.Ativo = 1;
-            _context.Processos.Add(processo);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(recoverProcessotById), new { id = processo.Id }, processo);
+            var createdProcesso = await _processoService.CreateProcessoAsync(dto);
+            return CreatedAtAction(nameof(GetProcessoById), new { id = createdProcesso.Id }, createdProcesso);
         }
 
-        /// <summary> Busca a lista inteira de Processos</summary>
         [HttpGet]
-        public IEnumerable<ReadProcessoDTO> recoverAllProcessos([FromQuery] int skip = 0, [FromQuery] int take = 10)
+        public async Task<IActionResult> GetLoficDeletionProcessosAsync([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
-            return _mapper.Map<List<ReadProcessoDTO>>(_context.Processos.Where(processo => processo.Ativo == 1).Skip(skip).Take(take).ToList());
-
+            var result = await _processoService.GetLogicDeletionProcessosAsync(skip, take);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpGet("/Processo/All")]
-        public IEnumerable<ReadProcessoDTO> recoverProcesso([FromQuery] int skip = 0, [FromQuery] int take = 10)
+        public async Task<IActionResult> GetAllProcessos([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
-            return _mapper.Map<List<ReadProcessoDTO>>(_context.Processos.Skip(skip).Take(take).ToList());
-
+            var result = await _processoService.GetAllProcessosAsync(skip, take);
+            return result != null ? Ok(result) : NotFound();
         }
 
-
         [HttpGet("{id}")]
-        public IActionResult recoverProcessotById(long id)
+        public async Task<IActionResult> GetProcessoById(long id)
         {
-            var result = _context.Processos.FirstOrDefault(processo => processo.Id == id);
-            return (result != null ? Ok(_mapper.Map<ReadProcessoDTO>(result)) : NotFound());
+            var processo = await _processoService.GetProcessoByIdAsync(id);
+            return processo != null ? Ok(processo) : NotFound();
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult UpdateProcesso(int id, [FromBody] UpdateProcessoDTO dto)
+        public async Task<IActionResult> UpdateProcesso(int id, [FromBody] UpdateProcessoDTO dto)
         {
-            Processo processo = _context.Processos.FirstOrDefault(processo => processo.Id == id);
-            if (processo == null) return NotFound();
-            _mapper.Map(dto, processo);
-            _context.SaveChanges();
-            return NoContent();
-        }
-
-        [HttpPatch("{id}")]
-        public IActionResult updatePatchProcesso(int id, JsonPatchDocument<UpdateProcessoDTO> patch)
-        {
-            Processo processo = _context.Processos.FirstOrDefault(processo => processo.Id == id);
-            if (processo == null) return NotFound();
-
-            var toUpdateProcesso = _mapper.Map<UpdateProcessoDTO>(processo);
-            patch.ApplyTo(toUpdateProcesso, ModelState);
-            if (!TryValidateModel(toUpdateProcesso)) return ValidationProblem(ModelState);
-
-            _mapper.Map(toUpdateProcesso, processo);
-            _context.SaveChanges();
-            return NoContent();
+            var result = await _processoService.UpdateProcessoAsync(id, dto);
+            return result == null ? NotFound() : NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult removeProcesso(int id)
+        public async Task<IActionResult> DeleteProcesso(int id)
         {
-            Processo processo = _context.Processos.FirstOrDefault(processo => processo.Id == id);
-            if (processo == null) return NotFound();
-            _context.Remove(processo);
-            _context.SaveChanges();
-            return NoContent();
+            var result = await _processoService.DeleteProcessoAsync(id);
+            return result == null ? NotFound() : NoContent();
         }
 
         [HttpDelete("/Processo/Logic/{id}")]
-        public IActionResult removeLogicalProcesso(int id)
+        public async Task<IActionResult> LogicalDeleteProcesso(int id)
         {
-            Processo processo = _context.Processos.FirstOrDefault(processo => processo.Id == id);
-            if (processo == null) return NotFound();
-            processo.Ativo = 0;
-            _context.SaveChanges();
-            return NoContent();
+            var result = await _processoService.LogicalDeleteProcessoAsync(id);
+            return result == null ? NotFound() : NoContent();
         }
     }
 }

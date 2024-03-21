@@ -28,7 +28,7 @@ namespace API_Lawyer.Model;
         public string Relator { get; set; }
         [Required]
         public string Volume { get; set; }
-        public int Ativo { get; set; } = 1;
+        public int Ativo { get; set; }
         public virtual ICollection<Transicao> Transicoes { get; set; }
         public virtual ICollection<Movimentacao> Movimentacoes { get; set; }
 

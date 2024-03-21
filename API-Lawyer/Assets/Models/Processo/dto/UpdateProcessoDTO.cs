@@ -18,5 +18,6 @@ namespace API_Lawyer.Assets.Model.Processo.dto
         public string Relator { get; set; }
         [Required]
         public string Volume { get; set; }
+        public int Ativo { get; set; }
     }
 }
