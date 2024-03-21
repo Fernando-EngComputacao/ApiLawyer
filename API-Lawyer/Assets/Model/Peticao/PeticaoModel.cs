@@ -1,8 +1,12 @@
-﻿namespace API_Lawyer.Assets.Model.Peticao
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API_Lawyer.Assets.Model.Peticao
 {
     public class PeticaoModel
     {
-        private string Id { get; set; }
+        [Key]
+        [Required]
+        private int Id { get; set; }
         private enum Tipo { Petição }
         private DateTime Data { get; set; }
         private string IdNumeroProcesso { get; set; }

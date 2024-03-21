@@ -1,11 +1,15 @@
-﻿namespace API_Lawyer.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API_Lawyer.Assets.Model.Carga
 {
     public class CargaModel
     {
-        private String Id { get; set; }
-        private String IdOrigem { get; set; }
-        private String IdDestino { get; set; }
-        private String IdNumeroProcesso { get; set; }
+        [Key]
+        [Required]
+        private int Id { get; set; }
+        private string IdOrigem { get; set; }
+        private string IdDestino { get; set; }
+        private string IdNumeroProcesso { get; set; }
 
 
     }

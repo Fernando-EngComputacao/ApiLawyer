@@ -1,4 +1,4 @@
-using API_Lawyer.Client;
+using API_Lawyer.Assets.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 

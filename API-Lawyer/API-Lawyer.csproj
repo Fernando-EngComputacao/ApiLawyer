@@ -9,8 +9,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.59" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.14" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.50.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.0.1" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Model\Carga\dto\" />
+    <Folder Include="Assets\Model\Destino\dto\" />
+    <Folder Include="Assets\Model\Julgamento\dto\" />
+    <Folder Include="Assets\Model\Movimentacao\dto\" />
+    <Folder Include="Assets\Model\Origem\dto\" />
+    <Folder Include="Assets\Model\Parte\dto\" />
+    <Folder Include="Assets\Model\Peticao\dto\" />
+    <Folder Include="Assets\Model\Processo\dto\" />
+    <Folder Include="Assets\Model\Recurso\dto\" />
+    <Folder Include="Assets\Model\Relacionado\dto\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

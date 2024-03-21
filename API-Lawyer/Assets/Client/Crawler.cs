@@ -1,11 +1,11 @@
-﻿using API_Lawyer.Model;
+﻿using API_Lawyer.Assets.Model.Processo;
 using HtmlAgilityPack;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Text.Json;
 
-namespace API_Lawyer.Client
+namespace API_Lawyer.Assets.Client
 {
     public class Crawler
     {
@@ -30,7 +30,7 @@ namespace API_Lawyer.Client
             WebClient client = new WebClient();
             client.Encoding = Encoding.UTF8;
             string htmlString = client.DownloadString(url);
-            HtmlAgilityPack.HtmlDocument doc23 = new HtmlAgilityPack.HtmlDocument();
+            HtmlDocument doc23 = new HtmlDocument();
             doc23.LoadHtml(htmlString);
             HtmlNode body23 = doc23.DocumentNode.Element("//body");
             Console.WriteLine(body23);
@@ -38,11 +38,11 @@ namespace API_Lawyer.Client
 
             //Console.WriteLine(content23);
 
-            Console.WriteLine("\n------HTML-----\n"+html);
+            Console.WriteLine("\n------HTML-----\n" + html);
 
 
             // Localizar a tabela que contém o valor do processo
-           
+
 
 
             // Extrair número do processo
@@ -82,7 +82,7 @@ namespace API_Lawyer.Client
         public string SerializeToJson(ProcessoModel processo)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
-            var json = System.Text.Json.JsonSerializer.Serialize(processo, options);
+            var json = JsonSerializer.Serialize(processo, options);
             return json;
 
         }
@@ -90,24 +90,24 @@ namespace API_Lawyer.Client
 
         public string GerarLinkEsaj(string numeroProcesso)
         {
-        string numeroUnificado = numeroProcesso.Substring(0,15);
-        string foro = numeroProcesso.Substring(21);
+            string numeroUnificado = numeroProcesso.Substring(0, 15);
+            string foro = numeroProcesso.Substring(21);
 
-        // Montando a URL
-        string url = "http://esaj.tjba.jus.br/cpo/sg/search.do";
-        url += "?paginaConsulta=1";
-        url += "&cbPesquisa=NUMPROC";
-        url += "&tipoNuProcesso=UNIFICADO";
-        url += "&numeroDigitoAnoUnificado=" + numeroUnificado;
-        url += "&foroNumeroUnificado=" + foro;
-        url += "&dePesquisaNuUnificado=" + numeroProcesso;
-        url += "&dePesquisa=";
-        url += "&pbEnviar=Pesquisar";
+            // Montando a URL
+            string url = "http://esaj.tjba.jus.br/cpo/sg/search.do";
+            url += "?paginaConsulta=1";
+            url += "&cbPesquisa=NUMPROC";
+            url += "&tipoNuProcesso=UNIFICADO";
+            url += "&numeroDigitoAnoUnificado=" + numeroUnificado;
+            url += "&foroNumeroUnificado=" + foro;
+            url += "&dePesquisaNuUnificado=" + numeroProcesso;
+            url += "&dePesquisa=";
+            url += "&pbEnviar=Pesquisar";
 
-        Console.WriteLine("\nNumeroUnificado: ["+ numeroUnificado+"]\nForo: ["+foro+"]\nLink<"+url+">");
+            Console.WriteLine("\nNumeroUnificado: [" + numeroUnificado + "]\nForo: [" + foro + "]\nLink<" + url + ">");
 
-        return url;
-    }
+            return url;
+        }
 
     }
 }

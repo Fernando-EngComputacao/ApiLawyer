@@ -1,8 +1,12 @@
-﻿namespace API_Lawyer.Assets.Model.Relacionado
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API_Lawyer.Assets.Model.Relacionado
 {
     public class RelacionadoModel
     {
-        private string Id { get; set; }
+        [Key]
+        [Required]
+        private int Id { get; set; }
         private enum Tipo { Apensos, Vinculados }
 
         private string Descricao { get; set; }

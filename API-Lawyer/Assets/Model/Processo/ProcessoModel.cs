@@ -1,7 +1,12 @@
-﻿namespace API_Lawyer.Assets.Model.Processo
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API_Lawyer.Assets.Model.Processo
 {
     public class ProcessoModel
     {
+        [Key]
+        [Required]
+        private int Id { get; set; }
         private string Numero { get; set; }
         private string Classe { get; set; }
         private string Area { get; set; }

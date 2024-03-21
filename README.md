@@ -49,6 +49,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 - [x] AutoMapper 12.0.0
 - [x] Swashbuckle.AspNetCore 6.2.3
 - [x] Swashbuckle.AspNetCore.Annotations 6.0.1
+- [x] System.Text.RegularExpressions 4.3.1
   
 ---
 
