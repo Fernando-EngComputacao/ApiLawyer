@@ -76,5 +76,5 @@ Exemplo:
 ---
 
 ####  :sunglasses: Autor: Fernando Furtado (2024)
-   - [LinkedIn](linkedin.com/in/furtadof/)
+   - [LinkedIn](https://linkedin.com/in/furtadof/)
    - [GitHub](https://github.com/Fernando-EngComputacao)
