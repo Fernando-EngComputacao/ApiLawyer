@@ -28,16 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\Model\Carga\dto\" />
-    <Folder Include="Assets\Model\Destino\dto\" />
-    <Folder Include="Assets\Model\Julgamento\dto\" />
-    <Folder Include="Assets\Model\Movimentacao\dto\" />
     <Folder Include="Assets\Model\Origem\dto\" />
-    <Folder Include="Assets\Model\Parte\dto\" />
-    <Folder Include="Assets\Model\Peticao\dto\" />
     <Folder Include="Assets\Model\Processo\dto\" />
-    <Folder Include="Assets\Model\Recurso\dto\" />
-    <Folder Include="Assets\Model\Relacionado\dto\" />
+    <Folder Include="Assets\Diagram\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

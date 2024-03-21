@@ -34,9 +34,6 @@ namespace API_Lawyer.Assets.Client
             doc23.LoadHtml(htmlString);
             HtmlNode body23 = doc23.DocumentNode.Element("//body");
             Console.WriteLine(body23);
-            //string content23 = body23.InnerText;
-
-            //Console.WriteLine(content23);
 
             Console.WriteLine("\n------HTML-----\n" + html);
 
