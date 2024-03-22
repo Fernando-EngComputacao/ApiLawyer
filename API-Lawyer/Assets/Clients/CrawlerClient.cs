@@ -1,5 +1,6 @@
 ﻿using API_Lawyer.Assets.Services.Validators;
 using API_Lawyer.Exceptions;
+using API_Lawyer.Model;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using System.Linq;
@@ -51,12 +52,13 @@ namespace API_Lawyer.Assets.Client
                         }
                     }
                 }
-                ProcessoJson(result);
+                //ProcessoJson(result);
+                OrigemJson(result);
                 return result;
             }
         }
 
-        private string ProcessoJson(Dictionary<string, string> dado)
+        private Dictionary<string, string> ProcessoJson(Dictionary<string, string> dado)
         {
             Dictionary<string, string> processo = new Dictionary<string, string>();
             string[] valores = {
@@ -94,9 +96,22 @@ namespace API_Lawyer.Assets.Client
                 });
             }
             Console.WriteLine($"Process \n {JsonConvert.SerializeObject(processo, Formatting.Indented)}");
-            return null;
+            return processo;
         }
-        
+
+
+        private Dictionary<string, string> OrigemJson(Dictionary<string, string> dado)
+        {
+            string texto = "Origem";
+            Dictionary<string, string> origem = new Dictionary<string, string>();
+            dado.Where(kv => kv.Value == $"{texto}:" && kv.Value.Length == 7)
+                .ToList()
+                .ForEach(kv => origem.Add($"{texto}", dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)]));
+
+            Console.WriteLine($"Origem \n {JsonConvert.SerializeObject(origem, Formatting.Indented)}");
+            return new Dictionary<string, string>();
+        }
+
 
         private string GerarLink(string numeroProcesso)
         {
