@@ -13,6 +13,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 - [x] CRUD do Processo 
 - [x] CRUD da Movimentação;
 - [x] CRUD da Origem;
+- [x] CRUD da Transição;
 - [x] Crawler do Site Tribunal de Justiça do Estado da Bahia
 - [x] Integração dos CRUDs com a base de dados
 - [x] Integração do Crawler com a base de dados
