@@ -1,6 +1,8 @@
 ﻿using API_Lawyer.Assets.Services.Validators;
 using API_Lawyer.Exceptions;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -49,10 +51,52 @@ namespace API_Lawyer.Assets.Client
                         }
                     }
                 }
-
+                ProcessoJson(result);
                 return result;
             }
         }
+
+        private string ProcessoJson(Dictionary<string, string> dado)
+        {
+            Dictionary<string, string> processo = new Dictionary<string, string>();
+            string[] valores = {
+            "Números de origem",
+            "Classe",
+            "Área",
+            "Assunto",
+            "Distribuição",
+            "Relator",
+            "Volume"
+            };
+
+
+            for (int count = 0; count < valores.Length; count++)
+            {
+                dado.Where(kv => kv.Value.Contains(valores[count]) && kv.Value.Length < 19)
+                .ToList()
+                .ForEach(kv =>
+                {
+                   switch(count)
+                    {
+                        case 0:
+                            processo.Add("NumeroProcesso", dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)]);
+                            break;
+                        case 2:
+                            processo.Add(valores[count], dado["Info_" + (int.Parse(kv.Key.Substring(5)))].Substring(6));
+                            break;
+                        case 6:
+                            processo.Add(valores[count], dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)].Substring(0,1));
+                            break;
+                        default:
+                            processo.Add(valores[count], dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)]);
+                            break;
+                    }
+                });
+            }
+            Console.WriteLine($"Process \n {JsonConvert.SerializeObject(processo, Formatting.Indented)}");
+            return null;
+        }
+        
 
         private string GerarLink(string numeroProcesso)
         {
