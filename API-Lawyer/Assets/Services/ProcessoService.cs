@@ -16,14 +16,12 @@ namespace API_Lawyer.Assets.Services
         private readonly LawyerContext _context;
         private readonly IMapper _mapper;
         private readonly ProcessoValidator _validator;
-        private readonly ILogger _logger;
 
-        public ProcessoService(LawyerContext context, IMapper mapper, ProcessoValidator validator, ILogger logger)
+        public ProcessoService(LawyerContext context, IMapper mapper, ProcessoValidator validator)
         {
             _context = context;
             _mapper = mapper;
             _validator = validator;
-            _logger = logger;
         }
 
         public async Task<ReadProcessoDTO> CreateProcessoAsync(CreateProcessoDTO dto)

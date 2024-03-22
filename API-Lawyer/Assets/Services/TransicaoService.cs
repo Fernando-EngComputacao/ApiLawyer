@@ -16,14 +16,12 @@ namespace API_Lawyer.Assets.Services
         private readonly LawyerContext _context;
         private readonly IMapper _mapper;
         private readonly TransicaoValidator _validator;
-        private readonly ILogger _logger;
 
-        public TransicaoService(LawyerContext context, IMapper mapper, ILogger logger, TransicaoValidator validator)
+        public TransicaoService(LawyerContext context, IMapper mapper, TransicaoValidator validator)
         {
             _context = context;
             _mapper = mapper;
             _validator = validator;
-            _logger = logger;
         }
 
         public async Task<ReadTransicaoDTO> CreateTransicaoAsync(CreateTransicaoDTO dto)
@@ -41,7 +39,7 @@ namespace API_Lawyer.Assets.Services
             return _mapper.Map<List<ReadTransicaoDTO>>(await _context.Transicoes.Skip(skip).Take(take).ToListAsync());
         }
 
-        public async Task<IEnumerable<ReadTransicaoDTO>> GetLogicDeletionTransicoesAsync(int skip = 0, int take = 10)
+        public async Task<IEnumerable<ReadTransicaoDTO>> GetLogicDeletionTransicaoAsync(int skip = 0, int take = 10)
         {
             return _mapper.Map<List<ReadTransicaoDTO>>(await _context.Transicoes.Where(transicao => transicao.Ativo == 1).Skip(skip).Take(take).ToListAsync());
         }

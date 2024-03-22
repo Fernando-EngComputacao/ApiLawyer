@@ -11,9 +11,9 @@ namespace API_Lawyer.Assets.Client
     {
         private readonly CrawlerValidator _validator;
 
-        public CrawlerClient()
+        public CrawlerClient(CrawlerValidator validator)
         {
-            _validator = new CrawlerValidator();
+            _validator = validator;
         }
 
         public async Task<Dictionary<string, string>> BaixarPagina(string numeroProcesso)
