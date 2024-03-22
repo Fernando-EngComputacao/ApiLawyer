@@ -24,7 +24,7 @@ namespace API_Lawyer.Assets.Controllers
         public async Task<IActionResult> SearchPage(string numeroProcesso)
         {
             var page = JsonConvert.SerializeObject(_crawler.BaixarPagina(numeroProcesso).Result, Formatting.Indented);
-            return Ok(page);
+            return Ok(page);    
         }
     }
 }

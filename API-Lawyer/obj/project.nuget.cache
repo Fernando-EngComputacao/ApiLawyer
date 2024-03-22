@@ -1,12 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "jft1bymkvcUq8YSgORl5j+HuMvGiISvjmAZz//IU3FNFSGN3Jx3D50yQ0mMzJ2LCEi/4cCEI9hqbdQ4PGQ0PiA==",
+  "dgSpecHash": "DVUVwIPmgvyUHXsvQEJdPEyg5+WgDNtXWhmKLSf0q5O3Ikwlueh1FifWkNV0LFw/V3N2/PhY39ME+98d3IkN2A==",
   "success": true,
   "projectFilePath": "C:\\Users\\carri\\Workspace\\lawyer\\API-Lawyer\\API-Lawyer\\API-Lawyer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\carri\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
+    "C:\\Users\\carri\\.nuget\\packages\\fluentvalidation\\10.3.0\\fluentvalidation.10.3.0.nupkg.sha512",
+    "C:\\Users\\carri\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.3.0\\fluentvalidation.aspnetcore.10.3.0.nupkg.sha512",
+    "C:\\Users\\carri\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.3.0\\fluentvalidation.dependencyinjectionextensions.10.3.0.nupkg.sha512",
+    "C:\\Users\\carri\\.nuget\\packages\\fuzzysharp\\2.0.2\\fuzzysharp.2.0.2.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\htmlagilitypack\\1.11.59\\htmlagilitypack.1.11.59.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.14\\microsoft.aspnetcore.cryptography.internal.6.0.14.nupkg.sha512",

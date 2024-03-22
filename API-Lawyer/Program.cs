@@ -1,6 +1,9 @@
 using API_Lawyer.Assets.Client;
 using API_Lawyer.Assets.Data;
 using API_Lawyer.Assets.Services;
+using API_Lawyer.Assets.Services.Validators;
+using API_Lawyer.Extensions.Exceptions;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +21,9 @@ builder.Services.AddDbContext<LawyerContext>(
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<CrawlerValidator>());
+
 builder.Services.AddHttpClient();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
