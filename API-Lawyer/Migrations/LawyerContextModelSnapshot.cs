@@ -108,19 +108,24 @@ namespace API_Lawyer.Migrations
 
             modelBuilder.Entity("API_Lawyer.Model.Transicao", b =>
                 {
-                    b.Property<int?>("OrigemId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProcessoId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("Ativo")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
+                    b.Property<int?>("OrigemId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.HasKey("OrigemId", "ProcessoId");
+                    b.Property<int?>("ProcessoId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrigemId");
 
                     b.HasIndex("ProcessoId");
 

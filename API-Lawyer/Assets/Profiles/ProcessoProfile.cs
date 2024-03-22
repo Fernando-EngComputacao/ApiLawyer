@@ -12,6 +12,8 @@ namespace API_Lawyer.Assets.Profiles
             CreateMap<UpdateProcessoDTO, Processo>();
             CreateMap<Processo, UpdateProcessoDTO>();
             CreateMap<Processo, ReadProcessoDTO>();
+            CreateMap<Processo, CreateProcessoDbDTO>();
+            CreateMap<Processo, CreateProcessoDTO>();
         }
     }
 }

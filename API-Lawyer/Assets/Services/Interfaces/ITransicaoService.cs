@@ -11,5 +11,6 @@ namespace API_Lawyer.Assets.Services.Interfaces
         Task<Transicao> UpdateTransicaoAsync(int id, UpdateTransicaoDTO dto);
         Task<Transicao> DeleteTransicaoAsync(int id);
         Task<Transicao> LogicalDeleteTransicaoAsync(int id);
+        Task<int?> GetIdAsync();
     }
 }

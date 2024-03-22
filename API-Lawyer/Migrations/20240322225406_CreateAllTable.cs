@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API_Lawyer.Migrations
 {
-    public partial class CreateAllTables : Migration
+    public partial class CreateAllTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -85,14 +85,15 @@ namespace API_Lawyer.Migrations
                 name: "Transicoes",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ProcessoId = table.Column<int>(type: "int", nullable: false),
                     OrigemId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     Ativo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transicoes", x => new { x.OrigemId, x.ProcessoId });
+                    table.PrimaryKey("PK_Transicoes", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Transicoes_Origens_OrigemId",
                         column: x => x.OrigemId,
@@ -112,6 +113,11 @@ namespace API_Lawyer.Migrations
                 name: "IX_Movimentacoes_ProcessoId",
                 table: "Movimentacoes",
                 column: "ProcessoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transicoes_OrigemId",
+                table: "Transicoes",
+                column: "OrigemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transicoes_ProcessoId",

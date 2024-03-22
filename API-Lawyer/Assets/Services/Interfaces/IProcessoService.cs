@@ -12,5 +12,7 @@ namespace API_Lawyer.Assets.Services.Interfaces
         Task<Processo> UpdateProcessoAsync(int id, UpdateProcessoDTO dto);
         Task<Processo> DeleteProcessoAsync(int id);
         Task<Processo> LogicalDeleteProcessoAsync(int id);
+        Task<ReadProcessoDTO> GetProcessoByNumeroProcessoAsync(string numeroProcesso);
+        Task<int?> GetIdAsync();
     }
 }

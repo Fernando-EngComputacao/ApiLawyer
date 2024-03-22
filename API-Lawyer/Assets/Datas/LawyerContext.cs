@@ -11,6 +11,10 @@ namespace API_Lawyer.Assets.Data
 
         }
 
+        public LawyerContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Transicao>()
@@ -30,6 +34,9 @@ namespace API_Lawyer.Assets.Data
                 .HasOne(movimentacao => movimentacao.Processo)
                 .WithMany(processo => processo.Movimentacoes)
                 .HasForeignKey(movimentacao => movimentacao.ProcessoId);
+
+            builder.Entity<Transicao>()
+                .HasKey(transicao => transicao.Id);
 
         }
 

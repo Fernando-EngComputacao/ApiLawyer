@@ -50,6 +50,18 @@ namespace API_Lawyer.Assets.Services
             return origem != null ? _mapper.Map<ReadOrigemDTO>(origem) : null;
         }
 
+        public async Task<int?> GetIdAsync()
+        {
+            var movimentacao = await _context.Origens.OrderByDescending(o => o.Id).FirstOrDefaultAsync();
+            return movimentacao != null ? movimentacao.Id : null;
+        }
+
+        public async Task<int?> GetOrigemByLocalAsync(string local)
+        {
+            var origem = await _context.Origens.FirstOrDefaultAsync(o => o.Local == local);
+            return origem != null ? origem.Id : null;
+        }
+
         public async Task<Origem> UpdateOrigemAsync(int id, UpdateOrigemDTO dto)
         {
             ValidarRequestOrigem(_mapper.Map<CreateOrigemDTO>(dto));

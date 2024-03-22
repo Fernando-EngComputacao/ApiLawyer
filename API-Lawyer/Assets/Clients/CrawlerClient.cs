@@ -52,13 +52,12 @@ namespace API_Lawyer.Assets.Client
                         }
                     }
                 }
-                //ProcessoJson(result);
-                OrigemJson(result);
+                ProcessoJson(result);
                 return result;
             }
         }
 
-        private Dictionary<string, string> ProcessoJson(Dictionary<string, string> dado)
+        public Dictionary<string, string> ProcessoJson(Dictionary<string, string> dado)
         {
             Dictionary<string, string> processo = new Dictionary<string, string>();
             string[] valores = {
@@ -73,17 +72,17 @@ namespace API_Lawyer.Assets.Client
 
 
             for (int count = 0; count < valores.Length; count++)
-            {
-                dado.Where(kv => kv.Value.Contains(valores[count]) && kv.Value.Length < 19)
-                .ToList()
-                .ForEach(kv =>
                 {
-                   switch(count)
+                    dado.Where(kv => kv.Value.Contains(valores[count]) && kv.Value.Length < 19)
+                    .ToList()
+                    .ForEach(kv =>
                     {
-                        case 0:
-                            processo.Add("NumeroProcesso", dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)]);
-                            break;
-                        case 2:
+                       switch(count)
+                        {
+                            case 0:
+                                processo.Add("NumeroProcesso", dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)]);
+                                break;
+                            case 2:
                             processo.Add(valores[count], dado["Info_" + (int.Parse(kv.Key.Substring(5)))].Substring(6));
                             break;
                         case 6:
@@ -95,12 +94,12 @@ namespace API_Lawyer.Assets.Client
                     }
                 });
             }
-            Console.WriteLine($"Process \n {JsonConvert.SerializeObject(processo, Formatting.Indented)}");
+            //Console.WriteLine($"\n {JsonConvert.SerializeObject(processo, Formatting.Indented)}");
             return processo;
         }
 
 
-        private Dictionary<string, string> OrigemJson(Dictionary<string, string> dado)
+        public Dictionary<string, string> OrigemJson(Dictionary<string, string> dado)
         {
             string texto = "Origem";
             Dictionary<string, string> origem = new Dictionary<string, string>();
@@ -108,13 +107,56 @@ namespace API_Lawyer.Assets.Client
                 .ToList()
                 .ForEach(kv => origem.Add($"{texto}", dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)]));
 
-            Console.WriteLine($"Origem \n {JsonConvert.SerializeObject(origem, Formatting.Indented)}");
-            return new Dictionary<string, string>();
+            //Console.WriteLine($"Origem \n {JsonConvert.SerializeObject(origem, Formatting.Indented)}");
+            return origem;
+        }
+
+        public Dictionary<string, string> MovimentacaoJson(Dictionary<string, string> dados)
+        {
+            Dictionary<string, string> movimento = new Dictionary<string, string>();
+
+            bool inMovimento = false;
+            string descricao = "";
+            string currentData = null;
+            int count = 0;
+            foreach (var kvp in dados)
+            {
+                if (kvp.Value == "Movimento" && kvp.Value.Length == 9)
+                {
+                    inMovimento = true;
+                }
+                else if (kvp.Value.Contains("Não há incidentes, ações incidentais, recursos") && kvp.Value.Length == 46)
+                {
+                    break;
+                }
+                else if (DateTime.TryParseExact(kvp.Value, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out _))
+                {
+                    
+                    if (currentData != null)
+                    {
+                        if (!string.IsNullOrEmpty(descricao))
+                        {
+                            movimento.Add("Data_"+count,currentData);
+                            movimento.Add("Descricao_"+count, descricao.Substring(3));
+                            descricao = ""; count++;
+                        }
+                    }
+                    currentData = kvp.Value;
+                }
+                else if (inMovimento)
+                {
+                    descricao += " / " + kvp.Value;
+                }
+            }
+
+            //Console.WriteLine($"Movimentacao \n {JsonConvert.SerializeObject(movimento, Formatting.Indented)}");
+            return movimento;
         }
 
 
-        private string GerarLink(string numeroProcesso)
-        {
+
+            private string GerarLink(string numeroProcesso)
+            {
             string numeroUnificado = numeroProcesso.Substring(0, 15);
             string foro = numeroProcesso.Substring(21);
 

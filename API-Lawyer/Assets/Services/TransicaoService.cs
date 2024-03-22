@@ -50,6 +50,12 @@ namespace API_Lawyer.Assets.Services
             return transicao != null ? _mapper.Map<ReadTransicaoDTO>(transicao) : null;
         }
 
+        public async Task<int?> GetIdAsync()
+        {
+            var processo = await _context.Transicoes.OrderByDescending(o => o.Id).FirstOrDefaultAsync();
+            return processo != null ? processo.Id : null;
+        }
+
         public async Task<Transicao> UpdateTransicaoAsync(int id, UpdateTransicaoDTO dto)
         {
             ValidarRequestTransicao(_mapper.Map<CreateTransicaoDTO>(dto));

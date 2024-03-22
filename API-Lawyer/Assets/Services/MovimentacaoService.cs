@@ -50,6 +50,12 @@ namespace API_Lawyer.Assets.Services
             return movimentacao != null ? _mapper.Map<ReadMovimentacaoDTO>(movimentacao) : null;
         }
 
+        public async Task<int?> GetIdAsync()
+        {
+            var movimentacao = await _context.Movimentacoes.OrderByDescending(o => o.Id).FirstOrDefaultAsync();
+            return movimentacao != null ? movimentacao.Id : null;
+        }
+
         public async Task<Movimentacao> UpdateMovimentacaoAsync(int id, UpdateMovimentacaoDTO dto)
         {
             ValidarRequestMovimentacao(_mapper.Map<CreateMovimentacaoDTO>(dto));

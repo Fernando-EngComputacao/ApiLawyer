@@ -50,6 +50,17 @@ namespace API_Lawyer.Assets.Services
             return processo != null ? _mapper.Map<ReadProcessoDTO>(processo) : null;
         }
 
+        public async Task<int?> GetIdAsync()
+        {
+            var processo = await _context.Processos.OrderByDescending(o => o.Id).FirstOrDefaultAsync();
+            return processo != null ? processo.Id : null;
+        }
+        public async Task<ReadProcessoDTO> GetProcessoByNumeroProcessoAsync(string numeroProcesso)
+        {
+            var processo = await _context.Processos.FirstOrDefaultAsync(o => o.NumeroProcesso == numeroProcesso);
+            return processo != null ? _mapper.Map<ReadProcessoDTO>(processo) : null;
+        }
+
         public async Task<Processo> UpdateProcessoAsync(int id, UpdateProcessoDTO dto)
         {
             ValidarRequestProcesso(_mapper.Map<CreateProcessoDTO>(dto));

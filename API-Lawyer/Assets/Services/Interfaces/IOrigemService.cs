@@ -14,6 +14,8 @@ namespace API_Lawyer.Assets.Services.Interfaces
         Task<Origem> UpdateOrigemAsync(int id, UpdateOrigemDTO dto);
         Task<Origem> DeleteOrigemAsync(int id);
         Task<Origem> LogicalDeleteOrigemAsync(int id);
+        Task<int?> GetOrigemByLocalAsync(string local);
+        Task<int?> GetIdAsync();
     }
 }
 

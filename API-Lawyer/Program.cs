@@ -43,6 +43,7 @@ builder.Services.AddScoped<OrigemService>();
 builder.Services.AddScoped<MovimentacaoService>();
 builder.Services.AddScoped<ProcessoService>();
 builder.Services.AddScoped<TransicaoService>();
+builder.Services.AddScoped<CrawlerService>();
 
 var app = builder.Build();
 

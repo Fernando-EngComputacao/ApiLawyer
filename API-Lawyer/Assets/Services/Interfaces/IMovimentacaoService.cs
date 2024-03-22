@@ -12,5 +12,6 @@ namespace API_Lawyer.Assets.Services.Interfaces
         Task<Movimentacao> UpdateMovimentacaoAsync(int id, UpdateMovimentacaoDTO dto);
         Task<Movimentacao> DeleteMovimentacaoAsync(int id);
         Task<Movimentacao> LogicalDeleteMovimentacaoAsync(int id);
+        Task<int?> GetIdAsync();
     }
 }

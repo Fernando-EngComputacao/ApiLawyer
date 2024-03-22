@@ -49,6 +49,13 @@ namespace API_Lawyer.Assets.Controllers
             return processo != null ? Ok(processo) : NotFound();
         }
 
+        [HttpGet("/Processo/Add/{numeroProcesso}")]
+        public async Task<IActionResult> GetProcessoByNumeroProcesso(string numeroProcesso)
+        {
+            var processo = await _processoService.GetProcessoByNumeroProcessoAsync(numeroProcesso);
+            return processo != null ? Ok(processo) : NotFound();
+        }
+
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateProcesso(int id, [FromBody] UpdateProcessoDTO dto)

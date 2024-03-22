@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Lawyer.Migrations
 {
     [DbContext(typeof(LawyerContext))]
-    [Migration("20240321221735_CreateAllTables")]
-    partial class CreateAllTables
+    [Migration("20240322225406_CreateAllTable")]
+    partial class CreateAllTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,19 +110,24 @@ namespace API_Lawyer.Migrations
 
             modelBuilder.Entity("API_Lawyer.Model.Transicao", b =>
                 {
-                    b.Property<int?>("OrigemId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProcessoId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("Ativo")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
+                    b.Property<int?>("OrigemId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.HasKey("OrigemId", "ProcessoId");
+                    b.Property<int?>("ProcessoId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrigemId");
 
                     b.HasIndex("ProcessoId");
 
