@@ -7,7 +7,9 @@ namespace API_Lawyer.Assets.Services.Validators
     {
         public OrigemValidator()
         {
-
+            RuleFor(x => x.Local)
+                .NotEmpty()
+                .WithMessage("O Local não pode ser nulo");
         }
     }
 }

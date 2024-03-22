@@ -9,12 +9,11 @@ namespace API_Lawyer.Assets.Client
 {
     public class CrawlerClient
     {
-        private readonly HttpClient _httpClient;
         private readonly CrawlerValidator _validator;
 
         public CrawlerClient()
         {
-            _httpClient = new HttpClient();
+            _validator = new CrawlerValidator();
         }
 
         public async Task<Dictionary<string, string>> BaixarPagina(string numeroProcesso)

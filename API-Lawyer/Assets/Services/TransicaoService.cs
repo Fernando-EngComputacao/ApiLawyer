@@ -1,9 +1,13 @@
 ﻿using API_Lawyer.Assets.Data;
+using API_Lawyer.Assets.Model.Processo.dto;
 using API_Lawyer.Assets.Models.Transicao.dto;
 using API_Lawyer.Assets.Services.Interfaces;
+using API_Lawyer.Assets.Services.Validators;
+using API_Lawyer.Exceptions;
 using API_Lawyer.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace API_Lawyer.Assets.Services
 {
@@ -11,15 +15,20 @@ namespace API_Lawyer.Assets.Services
     {
         private readonly LawyerContext _context;
         private readonly IMapper _mapper;
+        private readonly TransicaoValidator _validator;
+        private readonly ILogger _logger;
 
-        public TransicaoService(LawyerContext context, IMapper mapper)
+        public TransicaoService(LawyerContext context, IMapper mapper, ILogger logger, TransicaoValidator validator)
         {
             _context = context;
             _mapper = mapper;
+            _validator = validator;
+            _logger = logger;
         }
 
         public async Task<ReadTransicaoDTO> CreateTransicaoAsync(CreateTransicaoDTO dto)
         {
+            ValidarRequestTransicao(dto);
             var transicao = _mapper.Map<Transicao>(dto);
             transicao.Ativo = 1;
             _context.Transicoes.Add(transicao);
@@ -45,6 +54,7 @@ namespace API_Lawyer.Assets.Services
 
         public async Task<Transicao> UpdateTransicaoAsync(int id, UpdateTransicaoDTO dto)
         {
+            ValidarRequestTransicao(_mapper.Map<CreateTransicaoDTO>(dto));
             var transicao = await _context.Transicoes.FirstOrDefaultAsync(o => o.Id == id);
             if (transicao == null) return null;
 
@@ -78,9 +88,15 @@ namespace API_Lawyer.Assets.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ReadTransicaoDTO>> GetLogicDeletionTransicaoAsync(int skip = 0, int take = 10)
+        private void ValidarRequestTransicao(CreateTransicaoDTO dto)
         {
-            throw new NotImplementedException();
+            var validationResult = _validator.Validate(dto);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(Environment.NewLine, validationResult.Errors);
+                throw new LawyerException(errors, HttpStatusCode.BadRequest);
+            }
         }
     }
 }

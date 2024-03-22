@@ -1,9 +1,12 @@
 ﻿using API_Lawyer.Assets.Data;
 using API_Lawyer.Assets.Model.Origem.dto;
 using API_Lawyer.Assets.Services.Interfaces;
+using API_Lawyer.Assets.Services.Validators;
+using API_Lawyer.Exceptions;
 using API_Lawyer.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace API_Lawyer.Assets.Services
 {
@@ -12,15 +15,18 @@ namespace API_Lawyer.Assets.Services
 
         private readonly LawyerContext _context;
         private readonly IMapper _mapper;
+        private readonly OrigemValidator _validator;
 
-        public OrigemService(LawyerContext context, IMapper mapper)
+        public OrigemService(LawyerContext context, IMapper mapper, OrigemValidator validator)
         {
             _context = context;
             _mapper = mapper;
+            _validator = validator;
         }
 
         public async Task<ReadOrigemDTO> CreateOrigemAsync(CreateOrigemDTO dto)
         {
+            ValidarRequestOrigem(dto);
             var origem = _mapper.Map<Origem>(dto);
             origem.Ativo = 1;
             _context.Origens.Add(origem);
@@ -46,6 +52,7 @@ namespace API_Lawyer.Assets.Services
 
         public async Task<Origem> UpdateOrigemAsync(int id, UpdateOrigemDTO dto)
         {
+            ValidarRequestOrigem(_mapper.Map<CreateOrigemDTO>(dto));
             var origem = await _context.Origens.FirstOrDefaultAsync(o => o.Id == id);
             if (origem == null) return null;
 
@@ -72,6 +79,17 @@ namespace API_Lawyer.Assets.Services
             origem.Ativo = 0;
             await _context.SaveChangesAsync();
             return origem;
+        }
+
+        private void ValidarRequestOrigem(CreateOrigemDTO dto)
+        {
+            var validationResult = _validator.Validate(dto);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(Environment.NewLine, validationResult.Errors);
+                throw new LawyerException(errors, HttpStatusCode.BadRequest);
+            }
         }
     }
 }

@@ -1,9 +1,13 @@
 ﻿using API_Lawyer.Assets.Data;
+using API_Lawyer.Assets.Model.Movimentacao.dto;
 using API_Lawyer.Assets.Model.Processo.dto;
 using API_Lawyer.Assets.Services.Interfaces;
+using API_Lawyer.Assets.Services.Validators;
+using API_Lawyer.Exceptions;
 using API_Lawyer.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace API_Lawyer.Assets.Services
 {
@@ -11,15 +15,20 @@ namespace API_Lawyer.Assets.Services
     {
         private readonly LawyerContext _context;
         private readonly IMapper _mapper;
+        private readonly ProcessoValidator _validator;
+        private readonly ILogger _logger;
 
-        public ProcessoService(LawyerContext context, IMapper mapper)
+        public ProcessoService(LawyerContext context, IMapper mapper, ProcessoValidator validator, ILogger logger)
         {
             _context = context;
             _mapper = mapper;
+            _validator = validator;
+            _logger = logger;
         }
 
         public async Task<ReadProcessoDTO> CreateProcessoAsync(CreateProcessoDTO dto)
         {
+            ValidarRequestProcesso(dto);
             var processo = _mapper.Map<Processo>(dto);
             processo.Ativo = 1;
             _context.Processos.Add(processo);
@@ -45,6 +54,7 @@ namespace API_Lawyer.Assets.Services
 
         public async Task<Processo> UpdateProcessoAsync(int id, UpdateProcessoDTO dto)
         {
+            ValidarRequestProcesso(_mapper.Map<CreateProcessoDTO>(dto));
             var processo = await _context.Processos.FirstOrDefaultAsync(o => o.Id == id);
             if (processo == null) return null;
 
@@ -71,6 +81,17 @@ namespace API_Lawyer.Assets.Services
             processo.Ativo = 0;
             await _context.SaveChangesAsync();
             return processo;
+        }
+
+        private void ValidarRequestProcesso(CreateProcessoDTO dto)
+        {
+            var validationResult = _validator.Validate(dto);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(Environment.NewLine, validationResult.Errors);
+                throw new LawyerException(errors, HttpStatusCode.BadRequest);
+            }
         }
     }
 }

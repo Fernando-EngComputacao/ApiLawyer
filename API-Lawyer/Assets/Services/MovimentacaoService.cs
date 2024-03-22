@@ -1,9 +1,13 @@
 ﻿using API_Lawyer.Assets.Data;
 using API_Lawyer.Assets.Model.Movimentacao.dto;
+using API_Lawyer.Assets.Model.Origem.dto;
 using API_Lawyer.Assets.Services.Interfaces;
+using API_Lawyer.Assets.Services.Validators;
+using API_Lawyer.Exceptions;
 using API_Lawyer.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace API_Lawyer.Assets.Services
 {
@@ -11,15 +15,18 @@ namespace API_Lawyer.Assets.Services
     {
             private readonly LawyerContext _context;
             private readonly IMapper _mapper;
+            private readonly MovimentacaoValidator _validator;
 
-            public MovimentacaoService(LawyerContext context, IMapper mapper)
+            public MovimentacaoService(LawyerContext context, IMapper mapper, MovimentacaoValidator validator)
             {
                 _context = context;
                 _mapper = mapper;
+                _validator = validator;
             }
 
         public async Task<ReadMovimentacaoDTO> CreateMovimentacaoAsync(CreateMovimentacaoDTO dto)
         {
+            ValidarRequestMovimentacao(dto);
             var movimentacao = _mapper.Map<Movimentacao>(dto);
             movimentacao.Ativo = 1;
             _context.Movimentacoes.Add(movimentacao);
@@ -45,6 +52,7 @@ namespace API_Lawyer.Assets.Services
 
         public async Task<Movimentacao> UpdateMovimentacaoAsync(int id, UpdateMovimentacaoDTO dto)
         {
+            ValidarRequestMovimentacao(_mapper.Map<CreateMovimentacaoDTO>(dto));
             var movimentacao = await _context.Movimentacoes.FirstOrDefaultAsync(o => o.Id == id);
             if (movimentacao == null) return null;
 
@@ -73,5 +81,15 @@ namespace API_Lawyer.Assets.Services
             return movimentacao;
         }
 
+        private void ValidarRequestMovimentacao(CreateMovimentacaoDTO dto)
+        {
+            var validationResult = _validator.Validate(dto);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(Environment.NewLine, validationResult.Errors);
+                throw new LawyerException(errors, HttpStatusCode.BadRequest);
+            }
+        }
     }
 }

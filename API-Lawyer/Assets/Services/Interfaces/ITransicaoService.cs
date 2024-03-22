@@ -7,7 +7,6 @@ namespace API_Lawyer.Assets.Services.Interfaces
     {
         Task<ReadTransicaoDTO> CreateTransicaoAsync(CreateTransicaoDTO dto);
         Task<IEnumerable<ReadTransicaoDTO>> GetAllTransicaoAsync(int skip = 0, int take = 10);
-        Task<IEnumerable<ReadTransicaoDTO>> GetLogicDeletionTransicaoAsync(int skip = 0, int take = 10);
         Task<ReadTransicaoDTO> GetTransicaoByIdAsync(long id);
         Task<Transicao> UpdateTransicaoAsync(int id, UpdateTransicaoDTO dto);
         Task<Transicao> DeleteTransicaoAsync(int id);
