@@ -50,10 +50,10 @@ namespace API_Lawyer.Assets.Services
         {
             // Validar o numeroProcesso 
             ValidarRequestCrawler(numeroProcesso);
-            if (ValidaExisteCadastro(numeroProcesso))
-            {
-                new LawyerException("Número do processo já cadastrado", HttpStatusCode.BadRequest);
-            }
+            //if (ValidaExisteCadastro(numeroProcesso))
+            //{
+            //    new LawyerException("Número do processo já cadastrado", HttpStatusCode.BadRequest);
+            //}
 
             var page = _crawlerClient.BaixarPagina(numeroProcesso).Result;
             //Processo
