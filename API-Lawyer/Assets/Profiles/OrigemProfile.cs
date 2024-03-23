@@ -1,5 +1,4 @@
 ﻿using API_Lawyer.Assets.Model.Origem.dto;
-using API_Lawyer.Assets.Models.Origem.dto;
 using API_Lawyer.Model;
 using AutoMapper;
 

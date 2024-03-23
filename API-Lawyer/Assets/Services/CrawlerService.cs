@@ -3,8 +3,6 @@ using API_Lawyer.Assets.Data;
 using API_Lawyer.Assets.Model.Movimentacao.dto;
 using API_Lawyer.Assets.Model.Origem.dto;
 using API_Lawyer.Assets.Model.Processo.dto;
-using API_Lawyer.Assets.Models.Movimentacao.dto;
-using API_Lawyer.Assets.Models.Origem.dto;
 using API_Lawyer.Assets.Models.Transicao.dto;
 using API_Lawyer.Assets.Services.Interfaces;
 using API_Lawyer.Model;

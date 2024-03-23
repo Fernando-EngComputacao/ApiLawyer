@@ -1,5 +1,4 @@
 ﻿using API_Lawyer.Assets.Model.Movimentacao.dto;
-using API_Lawyer.Assets.Models.Movimentacao.dto;
 using API_Lawyer.Model;
 using AutoMapper;
 
