@@ -74,7 +74,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 ---
 
 ## :star: Orientações Adicionais
-#### Orientações Adicionais
+#### - Orientações Adicionais
 ###### - Para criar as Migrations, use o comando abaixo:
 
     Add-Migration <NomeDaMigration>
