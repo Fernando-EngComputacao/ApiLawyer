@@ -66,7 +66,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
     
  - Validação Origem: validação para impedir duplicidade de mesma origem na base de dados. Isto é, impede o registro duplo de uma mesma origem.
    - Crawler:  ao rodar o GET ou POST, do Crawler, de uma origem já cadastrada na base de dados, o sistema ignora a tentativa de cadastro e não reflete aviso;
-   - Origem: ao rodar o GET ou POST de uma origem já cadastrada na base de dados, o sistema acusa a tentativa de cadastro e reflete aviso;
+   - Origem: ao rodar o POST de uma origem já cadastrada na base de dados, o sistema acusa a tentativa de cadastro e reflete aviso;
  
 
 
