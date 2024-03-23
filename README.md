@@ -57,9 +57,25 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 
 ---
 
+## :bookmark: Recursos Adicionais
+#### Validações Adicionais de Negócio
+ - *Validação Numero Processo:* validação para impedir duplicidade de mesmo processo na base de dados. Isto é, impede o registro duplo de um mesmo processo.
+   - *Crawler:* ao rodar o GET ou POST, do Crawler, de um processo já cadastrado na base de dados, o sistema avisa a duplicidade e não cadastra o processo;
+   - *Processo:* ao rodar o POST no campo do Processo, ocorre o mesmo cenário do caso descrito acima (Crawler).
+   
+    
+ - Validação Origem: validação para impedir duplicidade de mesma origem na base de dados. Isto é, impede o registro duplo de uma mesma origem.
+   - Crawler:  ao rodar o GET ou POST, do Crawler, de uma origem já cadastrada na base de dados, o sistema ignora a tentativa de cadastro e não reflete aviso;
+   - Origem: ao rodar o GET ou POST de uma origem já cadastrada na base de dados, o sistema acusa a tentativa de cadastro e reflete aviso;
+ 
+
+
+
+---
+
 ## :star: Orientações Adicionais
 #### Orientações Adicionais
-###### - Para criar as Migratoions, use o comando abaixo:
+###### - Para criar as Migrations, use o comando abaixo:
 
     Add-Migration <NomeDaMigration>
 

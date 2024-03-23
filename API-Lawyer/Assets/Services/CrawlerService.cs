@@ -88,15 +88,19 @@ namespace API_Lawyer.Assets.Services
                 dtoOrigem.Local = item;
 
                 //***Pronto
-                var origem = _mapper.Map<Origem>(dtoOrigem);
-                origem.Ativo = 1;
-                _context.Origens.Add(origem);
-                _context.SaveChanges();
-
+                if(!_context.Origens.Any(o => o.Local == dtoOrigem.Local))
+                {
+                    var origem = _mapper.Map<Origem>(dtoOrigem);
+                    origem.Ativo = 1;
+                    _context.Origens.Add(origem);
+                    _context.SaveChanges();
+                }
 
                 CreateTransicaoDTO dtoTransicao = new CreateTransicaoDTO();
                 dtoTransicao.ProcessoId = processoId;
                 dtoTransicao.OrigemId = idOrigem;
+
+                //***Pronto
                 var transicao = _mapper.Map<Transicao>(dtoTransicao);
                 transicao.Ativo = 1;
                 _context.Transicoes.Add(transicao);
