@@ -27,7 +27,9 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 - [x] Implementação de relacionamento: 1-n e n-n;
 - [x] Atuação de tipos de consultas com LINQ;
 - [x] Utilização de Crawler
-- [x] Validação de Dados Inseridos
+- [x] Validação Técnica de Recurso
+- [x] Validação de Negócio
+
 
 --- 
 
