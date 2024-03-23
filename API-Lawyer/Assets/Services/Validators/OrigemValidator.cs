@@ -16,7 +16,7 @@ namespace API_Lawyer.Assets.Services.Validators
                 .NotEmpty()
                 .WithMessage("O Local não pode ser nulo")
                 .MustAsync(ExistirLocal)
-                .WithMessage("O Local já existe no banco de dados");    
+                .WithMessage("O Local já existente na base de dados");    
         }
 
         private async Task<bool> ExistirLocal(string local, CancellationToken cancellationToken)
