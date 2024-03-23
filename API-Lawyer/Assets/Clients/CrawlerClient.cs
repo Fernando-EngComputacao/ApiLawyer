@@ -1,5 +1,4 @@
-﻿using API_Lawyer.Assets.Services.Validators;
-using API_Lawyer.Exceptions;
+﻿using API_Lawyer.Exceptions;
 using API_Lawyer.Model;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
@@ -12,18 +11,12 @@ namespace API_Lawyer.Assets.Client
 {
     public class CrawlerClient
     {
-        private readonly CrawlerValidator _validator;
-
-        public CrawlerClient(CrawlerValidator validator)
+        public CrawlerClient()
         {
-            _validator = validator;
         }
 
         public async Task<Dictionary<string, string>> BaixarPagina(string numeroProcesso)
         {
-            // Validar o numeroProcesso 
-            ValidarRequestCrawler(numeroProcesso);
-
             var url = GerarLink(numeroProcesso);
             using (var httpClient = new HttpClient())
             {
@@ -172,17 +165,6 @@ namespace API_Lawyer.Assets.Client
             url += "&pbEnviar=Pesquisar";
 
             return url;
-        }
-
-        private void ValidarRequestCrawler(string numeroProcesso)
-        {
-            var validationResult = _validator.Validate(numeroProcesso);
-
-            if (!validationResult.IsValid)
-            {
-                var errors = string.Join(Environment.NewLine, validationResult.Errors);
-                throw new LawyerException(errors, HttpStatusCode.BadRequest);
-            }
         }
     }
 }

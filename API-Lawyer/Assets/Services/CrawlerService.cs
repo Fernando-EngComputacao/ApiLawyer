@@ -5,10 +5,14 @@ using API_Lawyer.Assets.Model.Origem.dto;
 using API_Lawyer.Assets.Model.Processo.dto;
 using API_Lawyer.Assets.Models.Transicao.dto;
 using API_Lawyer.Assets.Services.Interfaces;
+using API_Lawyer.Assets.Services.Validators;
+using API_Lawyer.Exceptions;
 using API_Lawyer.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace API_Lawyer.Assets.Services
 {
@@ -21,6 +25,7 @@ namespace API_Lawyer.Assets.Services
         private readonly TransicaoService _transicao;
         private readonly IMapper _mapper;
         private readonly LawyerContext _context;
+        private readonly CrawlerValidator _validator;
 
         public CrawlerService(CrawlerClient crawlerClient, 
                                 MovimentacaoService movimentacao, 
@@ -28,7 +33,8 @@ namespace API_Lawyer.Assets.Services
                                 ProcessoService processo,
                                 TransicaoService transicao,
                                 IMapper mapper,
-                                LawyerContext context)
+                                LawyerContext context,
+                                CrawlerValidator validator)
         {
             _crawlerClient = crawlerClient;
             _movimetacao = movimentacao;
@@ -37,10 +43,18 @@ namespace API_Lawyer.Assets.Services
             _transicao = transicao;
             _mapper = mapper;
             _context = context;
+            _validator = validator;
         }
 
         public void Start(string numeroProcesso)
         {
+            // Validar o numeroProcesso 
+            ValidarRequestCrawler(numeroProcesso);
+            if (ValidaExisteCadastro(numeroProcesso))
+            {
+                new LawyerException("Número do processo já cadastrado", HttpStatusCode.BadRequest);
+            }
+
             var page = _crawlerClient.BaixarPagina(numeroProcesso).Result;
             //Processo
             var processoId = SalvarProcesso(_crawlerClient.ProcessoJson(page));
@@ -84,19 +98,20 @@ namespace API_Lawyer.Assets.Services
             {
                 CreateOrigemDTO dtoOrigem = new CreateOrigemDTO();
                 dtoOrigem.Local = item;
-
+                var origem = _mapper.Map<Origem>(dtoOrigem);
+                origem.Ativo = 1;
                 //***Pronto
-                if(!_context.Origens.Any(o => o.Local == dtoOrigem.Local))
+                if (!_context.Origens.Any(o => o.Local == dtoOrigem.Local))
                 {
-                    var origem = _mapper.Map<Origem>(dtoOrigem);
-                    origem.Ativo = 1;
                     _context.Origens.Add(origem);
                     _context.SaveChanges();
                 }
 
+                var catOrigem = _context.Origens.FirstOrDefault(x => x.Local == origem.Local);
+                int idOrigemValido = catOrigem.Id;
                 CreateTransicaoDTO dtoTransicao = new CreateTransicaoDTO();
                 dtoTransicao.ProcessoId = processoId;
-                dtoTransicao.OrigemId = idOrigem;
+                dtoTransicao.OrigemId = idOrigemValido;
 
                 //***Pronto
                 var transicao = _mapper.Map<Transicao>(dtoTransicao);
@@ -104,10 +119,12 @@ namespace API_Lawyer.Assets.Services
                 _context.Transicoes.Add(transicao);
                 _context.SaveChanges();
 
-
                 //Console.WriteLine(JsonConvert.SerializeObject(dtoOrigem, Formatting.Indented));
                 //Console.WriteLine(JsonConvert.SerializeObject(_mapper.Map<CreateTransicaoDbDTO>(transicao), Formatting.Indented));
             }
+
+
+
         }
 
 
@@ -130,6 +147,23 @@ namespace API_Lawyer.Assets.Services
 
                 //Console.WriteLine(JsonConvert.SerializeObject(movimentacaoDto, Formatting.Indented));
             }
+        }
+
+        private void ValidarRequestCrawler(string numeroProcesso)
+        {
+            var validationResult = _validator.Validate(numeroProcesso);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(Environment.NewLine, validationResult.Errors);
+                throw new LawyerException(errors, HttpStatusCode.BadRequest);
+            }
+        }
+
+        private bool ValidaExisteCadastro(string numeroProcesso)
+        {
+            // Verifica se o número do processo já existe no banco de dados
+            return _context.Processos.All(p => p.NumeroProcesso == numeroProcesso);
         }
     }
 }
