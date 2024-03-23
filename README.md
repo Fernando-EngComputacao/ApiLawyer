@@ -58,7 +58,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 ---
 
 ## :bookmark: Recursos Adicionais
-#### Validações Adicionais de Negócio
+### - Validações Adicionais de Negócio
  - *Validação Numero Processo:* validação para impedir duplicidade de mesmo processo na base de dados. Isto é, impede o registro duplo de um mesmo processo.
    - *Crawler:* ao rodar o GET ou POST, do Crawler, de um processo já cadastrado na base de dados, o sistema avisa a duplicidade e não cadastra o processo;
    - *Processo:* ao rodar o POST no campo do Processo, ocorre o mesmo cenário do caso descrito acima (Crawler).
