@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Lawyer.Migrations
 {
     [DbContext(typeof(LawyerContext))]
-    [Migration("20240323023120_CreateAllTables")]
+    [Migration("20240323032436_CreateAllTables")]
     partial class CreateAllTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

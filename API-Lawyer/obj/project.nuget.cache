@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DVUVwIPmgvyUHXsvQEJdPEyg5+WgDNtXWhmKLSf0q5O3Ikwlueh1FifWkNV0LFw/V3N2/PhY39ME+98d3IkN2A==",
+  "dgSpecHash": "9FOvCJUgMivmRLuLHF8DXSZ8+Y7oTeNZ/4yGOVv9337U7K9Itu0kZXhNManBCyq7qyWRSIz5RIospIbx0LIPUg==",
   "success": true,
   "projectFilePath": "C:\\Users\\carri\\Workspace\\lawyer\\API-Lawyer\\API-Lawyer\\API-Lawyer.csproj",
   "expectedPackageFiles": [
@@ -76,9 +76,9 @@
     "C:\\Users\\carri\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.0.1\\swashbuckle.aspnetcore.annotations.6.0.1.nupkg.sha512",
-    "C:\\Users\\carri\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
-    "C:\\Users\\carri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
-    "C:\\Users\\carri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
+    "C:\\Users\\carri\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\carri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\carri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Users\\carri\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

@@ -4,6 +4,9 @@ using API_Lawyer.Assets.Services;
 using API_Lawyer.Assets.Services.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +39,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddTransient<CrawlerClient>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen( c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo() { Title = "API-Lawyer", Version = "v1" });
+});
 
 // To use Service
 builder.Services.AddScoped<OrigemService>();

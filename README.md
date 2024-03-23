@@ -40,6 +40,8 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 - [x] Microsoft.EntityFrameworkCore.Proxies 6.0.14
 - [x] Microsoft.AspNetCore.Mvc.NewtonsoftJson 6.0.14
 - [x] Microsoft.Extensions.Identity.Stores 6.0.14
+- [x] Swashbuckle.AspNetCore.SwaggerGen 6.2.3
+- [x] Swashbuckle.AspNetCore.SwaggerUI 6.5.2
 - [x] System.IdentityModel.Tokens.ValidatingIssuerNameRegistry 4.5.1
 - [x] AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.0
 - [x] Swashbuckle.AspNetCore.Annotations 6.0.1
