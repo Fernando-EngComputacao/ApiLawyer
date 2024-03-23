@@ -13,7 +13,6 @@ namespace API_Lawyer.Assets.Profiles
             CreateMap<UpdateOrigemDTO, Origem>();
             CreateMap<Origem, UpdateOrigemDTO>();
             CreateMap<Origem, ReadOrigemDTO>();
-            CreateMap<Origem, CreateOrigemDbDTO>();
             CreateMap<Origem, CreateOrigemDTO>();
         }
     }

@@ -13,7 +13,6 @@ namespace API_Lawyer.Assets.Profiles
             CreateMap<UpdateMovimentacaoDTO, Movimentacao>();
             CreateMap<Movimentacao, UpdateMovimentacaoDTO>();
             CreateMap<Movimentacao, ReadMovimentacaoDTO>();
-            CreateMap<Movimentacao, CreateMovimentacaoDbDTO>();
             CreateMap<Movimentacao, CreateMovimentacaoDTO>();
         }
     }

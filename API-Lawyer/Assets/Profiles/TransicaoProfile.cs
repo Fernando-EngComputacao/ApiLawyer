@@ -12,7 +12,6 @@ namespace API_Lawyer.Assets.Profiles
             CreateMap<UpdateTransicaoDTO, Transicao>();
             CreateMap<Transicao, UpdateTransicaoDTO>();
             CreateMap<Transicao, ReadTransicaoDTO>();
-            CreateMap<Transicao, CreateTransicaoDbDTO>();
             CreateMap<Transicao, CreateTransicaoDTO>();
         }
     }
