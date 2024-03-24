@@ -13,11 +13,11 @@ namespace API_Lawyer.Assets.Services
 {
     public class ProcessoService : IProcessoService
     {
-        private readonly LawyerContext _context;
+        private readonly LawyerDbContext _context;
         private readonly IMapper _mapper;
         private readonly ProcessoValidator _validator;
 
-        public ProcessoService(LawyerContext context, IMapper mapper, ProcessoValidator validator)
+        public ProcessoService(LawyerDbContext context, IMapper mapper, ProcessoValidator validator)
         {
             _context = context;
             _mapper = mapper;

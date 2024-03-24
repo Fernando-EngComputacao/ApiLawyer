@@ -45,7 +45,7 @@ namespace API_Lawyer.Assets.Client
                         }
                     }
                 }
-                ProcessoJson(result);
+                //ProcessoJson(result);
                 return result;
             }
         }
@@ -164,6 +164,7 @@ namespace API_Lawyer.Assets.Client
             url += "&dePesquisa=";
             url += "&pbEnviar=Pesquisar";
 
+            //Console.WriteLine(url);
             return url;
         }
     }

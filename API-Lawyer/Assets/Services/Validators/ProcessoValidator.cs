@@ -7,8 +7,8 @@ namespace API_Lawyer.Assets.Services.Validators
 {
     public class ProcessoValidator : AbstractValidator<CreateProcessoDTO>
     {
-        private readonly LawyerContext _context;
-        public ProcessoValidator(LawyerContext context)
+        private readonly LawyerDbContext _context;
+        public ProcessoValidator(LawyerDbContext context)
         {
             _context = context;
 

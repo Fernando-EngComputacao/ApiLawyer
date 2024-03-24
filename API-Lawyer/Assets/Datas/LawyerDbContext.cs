@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API_Lawyer.Assets.Data
 {
-    public class LawyerContext : DbContext
+    public class LawyerDbContext : DbContext
     {
-        public LawyerContext(DbContextOptions<LawyerContext> opts) : base(opts)
+        public LawyerDbContext(DbContextOptions<LawyerDbContext> opts) : base(opts)
         {
 
         }
 
-        public LawyerContext()
+        public LawyerDbContext()
         {
         }
 

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API_Lawyer.Migrations
 {
-    [DbContext(typeof(LawyerContext))]
-    partial class LawyerContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(LawyerDbContext))]
+    partial class LawyerDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

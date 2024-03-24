@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API-Lawyer</name>
+    </assembly>
+    <members>
+        <member name="M:API_Lawyer.Assets.Controllers.AutenticacaoController.Autenticacao(API_Lawyer.Assets.Models.Autenticacao.dto.AutorizacaoUsuarioDTO)">
+            <summary> 🔑 Autentica um usuário (login) + 🔓 LIVRE de Autenticação  </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.CrawlerController.SearchPage(System.String)">
+            <summary> Busca a página do processo inserido em formato JSON </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.CrawlerController.SavePage(System.String)">
+            <summary> Busca na WEB o processo e salva seus dados na base de dados </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.MovimentacaoController.CreateMovimentacao(API_Lawyer.Assets.Model.Movimentacao.dto.CreateMovimentacaoDTO)">
+            <summary> Cadastra uma movimentação no banco de dados </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.MovimentacaoController.GetLoficDeletionMovimentacoesAsync(System.Int32,System.Int32)">
+            <summary> Busca todas as movimentações existentes no banco de dados com exceção as deletadas logicamente </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.MovimentacaoController.GetAllMovimentacoes(System.Int32,System.Int32)">
+            <summary> Busca todas as movimentações existentes no banco de dados incluso as deletadas logicamente </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.MovimentacaoController.GetMovimentacaoById(System.Int64)">
+            <summary> Busca uma movimentação pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.MovimentacaoController.UpdateMovimentacao(System.Int32,API_Lawyer.Assets.Model.Movimentacao.dto.UpdateMovimentacaoDTO)">
+            <summary> Altera uma movimentação pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.MovimentacaoController.DeleteMovimentacao(System.Int32)">
+            <summary> Deleta permanentemente uma movimentação pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.MovimentacaoController.LogicalDeleteMovimentacao(System.Int32)">
+            <summary> Deleta logicamente uma movimentação pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.OrigemController.CreateOrigem(API_Lawyer.Assets.Model.Origem.dto.CreateOrigemDTO)">
+            <summary> Cadastra uma origem no banco de dados </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.OrigemController.GetLoficDeletionOrigensAsync(System.Int32,System.Int32)">
+            <summary> Busca todas as origens existentes no banco de dados com exceção as deletadas logicamente </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.OrigemController.GetAllOrigens(System.Int32,System.Int32)">
+            <summary> Busca todas as origens existentes no banco de dados incluso as deletadas logicamente </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.OrigemController.GetOrigemById(System.Int64)">
+            <summary> Busca uma origem pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.OrigemController.UpdateOrigem(System.Int32,API_Lawyer.Assets.Model.Origem.dto.UpdateOrigemDTO)">
+            <summary> Altera uma origem pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.OrigemController.DeleteOrigem(System.Int32)">
+            <summary> Deleta permanentemente uma origem pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.OrigemController.LogicalDeleteOrigem(System.Int32)">
+            <summary> Deleta logicamente uma origem pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.ProcessoController.CreateProcesso(API_Lawyer.Assets.Model.Processo.dto.CreateProcessoDTO)">
+            <summary> Cadastra um processo no banco de dados </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.ProcessoController.GetLoficDeletionProcessosAsync(System.Int32,System.Int32)">
+            <summary> Busca todos os processos existentes no banco de dados com exceção os deletados logicamente </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.ProcessoController.GetAllProcessos(System.Int32,System.Int32)">
+            <summary> Busca todos os processos existentes no banco de dados incluso os deletados logicamente </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.ProcessoController.GetProcessoById(System.Int64)">
+            <summary> Busca um processo pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.ProcessoController.GetProcessoByNumeroProcesso(System.String)">
+            <summary> Busca um processo pelo número do processo </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.ProcessoController.UpdateProcesso(System.Int32,API_Lawyer.Assets.Model.Processo.dto.UpdateProcessoDTO)">
+            <summary> Altera os dados de um processo pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.ProcessoController.DeleteProcesso(System.Int32)">
+            <summary> Deleta um processo pelo ID de forma permanente </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.ProcessoController.LogicalDeleteProcesso(System.Int32)">
+            <summary> Deleta um processo pelo ID de forma lógica </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.TransicaoController.CreateTransicao(API_Lawyer.Assets.Models.Transicao.dto.CreateTransicaoDTO)">
+            <summary> Cadastra uma transicao no banco de dados </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.TransicaoController.GetLoficDeletionTransicaoAsync(System.Int32,System.Int32)">
+            <summary> Busca todas as transições existentes no banco de dados com exceção as deletadas logicamente </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.TransicaoController.GetAllTransicao(System.Int32,System.Int32)">
+            <summary> Busca todas as transições existentes no banco de dados incluso as deletadas logicamente </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.TransicaoController.GetTransicaoById(System.Int64)">
+            <summary> Busca uma transição pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.TransicaoController.UpdateTransicao(System.Int32,API_Lawyer.Assets.Models.Transicao.dto.UpdateTransicaoDTO)">
+            <summary> Altera uma transição pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.TransicaoController.DeleteTransicao(System.Int32)">
+            <summary> Deleta permanentemente uma transição pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.TransicaoController.LogicalDeleteTransicao(System.Int32)">
+            <summary> Deleta logicamente uma transição pelo ID </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.UsuarioController.CreateUsuario(API_Lawyer.Assets.Models.Usuario.dto.CreateUsuarioDTO)">
+            <summary> Adiciona um usuário ao banco de dados + 🔓 LIVRE de Autenticação </summary>
+        </member>
+        <member name="M:API_Lawyer.Assets.Controllers.UsuarioController.BuscaUsuarios(System.Int32,System.Int32)">
+            <summary> Busca todos os usuários cadastrados no banco de dados </summary>
+        </member>
+    </members>
+</doc>

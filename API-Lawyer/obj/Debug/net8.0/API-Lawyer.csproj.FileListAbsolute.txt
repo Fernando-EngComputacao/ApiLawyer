@@ -81,3 +81,6 @@ C:\Users\carri\Workspace\lawyer\API-Lawyer\API-Lawyer\bin\Debug\net8.0\FluentVal
 C:\Users\carri\Workspace\lawyer\API-Lawyer\API-Lawyer\bin\Debug\net8.0\FuzzySharp.dll
 C:\Users\carri\Workspace\lawyer\API-Lawyer\API-Lawyer\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
 C:\Users\carri\Workspace\lawyer\API-Lawyer\API-Lawyer\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\carri\Workspace\lawyer\API-Lawyer\API-Lawyer\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\carri\Workspace\lawyer\API-Lawyer\API-Lawyer\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\carri\Workspace\lawyer\API-Lawyer\API-Lawyer\bin\Debug\net8.0\API-Lawyer.xml

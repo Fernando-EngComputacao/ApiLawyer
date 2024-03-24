@@ -13,11 +13,11 @@ namespace API_Lawyer.Assets.Services
 {
     public class MovimentacaoService : IMovimentacaoService
     {
-            private readonly LawyerContext _context;
+            private readonly LawyerDbContext _context;
             private readonly IMapper _mapper;
             private readonly MovimentacaoValidator _validator;
 
-            public MovimentacaoService(LawyerContext context, IMapper mapper, MovimentacaoValidator validator)
+            public MovimentacaoService(LawyerDbContext context, IMapper mapper, MovimentacaoValidator validator)
             {
                 _context = context;
                 _mapper = mapper;

@@ -13,11 +13,11 @@ namespace API_Lawyer.Assets.Services
 {
     public class TransicaoService : ITransicaoService
     {
-        private readonly LawyerContext _context;
+        private readonly LawyerDbContext _context;
         private readonly IMapper _mapper;
         private readonly TransicaoValidator _validator;
 
-        public TransicaoService(LawyerContext context, IMapper mapper, TransicaoValidator validator)
+        public TransicaoService(LawyerDbContext context, IMapper mapper, TransicaoValidator validator)
         {
             _context = context;
             _mapper = mapper;
@@ -34,7 +34,7 @@ namespace API_Lawyer.Assets.Services
             return _mapper.Map<ReadTransicaoDTO>(transicao);
         }
 
-        public async Task<IEnumerable<ReadTransicaoDTO>> GetAllTransicoesAsync(int skip = 0, int take = 10)
+        public async Task<IEnumerable<ReadTransicaoDTO>> GetAllTransicaoAsync(int skip = 0, int take = 10)
         {
             return _mapper.Map<List<ReadTransicaoDTO>>(await _context.Transicoes.Skip(skip).Take(take).ToListAsync());
         }
@@ -85,11 +85,6 @@ namespace API_Lawyer.Assets.Services
             transicao.Ativo = 0;
             await _context.SaveChangesAsync();
             return transicao;
-        }
-
-        public Task<IEnumerable<ReadTransicaoDTO>> GetAllTransicaoAsync(int skip = 0, int take = 10)
-        {
-            throw new NotImplementedException();
         }
 
         private void ValidarRequestTransicao(CreateTransicaoDTO dto)

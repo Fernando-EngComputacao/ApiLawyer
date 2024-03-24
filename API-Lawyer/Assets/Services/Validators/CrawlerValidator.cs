@@ -10,10 +10,10 @@ namespace API_Lawyer.Assets.Services.Validators
 {
     public class CrawlerValidator : AbstractValidator<string>
     {
-        private readonly LawyerContext _context;
+        private readonly LawyerDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CrawlerValidator(LawyerContext context, IHttpContextAccessor httpContextAccessor)
+        public CrawlerValidator(LawyerDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;

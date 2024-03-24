@@ -19,28 +19,22 @@ namespace API_Lawyer.Assets.Services
     public class CrawlerService : ICrawlerService
     {
         private readonly CrawlerClient _crawlerClient;
-        private readonly MovimentacaoService _movimetacao;
         private readonly OrigemService _origem;
         private readonly ProcessoService _processo;
-        private readonly TransicaoService _transicao;
         private readonly IMapper _mapper;
-        private readonly LawyerContext _context;
+        private readonly LawyerDbContext _context;
         private readonly CrawlerValidator _validator;
 
         public CrawlerService(CrawlerClient crawlerClient, 
-                                MovimentacaoService movimentacao, 
                                 OrigemService origem,
                                 ProcessoService processo,
-                                TransicaoService transicao,
                                 IMapper mapper,
-                                LawyerContext context,
+                                LawyerDbContext context,
                                 CrawlerValidator validator)
         {
             _crawlerClient = crawlerClient;
-            _movimetacao = movimentacao;
             _origem = origem;
             _processo = processo;
-            _transicao = transicao;
             _mapper = mapper;
             _context = context;
             _validator = validator;
@@ -50,11 +44,7 @@ namespace API_Lawyer.Assets.Services
         {
             // Validar o numeroProcesso 
             ValidarRequestCrawler(numeroProcesso);
-            //if (ValidaExisteCadastro(numeroProcesso))
-            //{
-            //    new LawyerException("Número do processo já cadastrado", HttpStatusCode.BadRequest);
-            //}
-
+            
             var page = _crawlerClient.BaixarPagina(numeroProcesso).Result;
             //Processo
             var processoId = SalvarProcesso(_crawlerClient.ProcessoJson(page));

@@ -1,7 +1,7 @@
 ﻿using API_Lawyer.Assets.Client;
+using API_Lawyer.Assets.Security.autorizacao;
 using API_Lawyer.Assets.Services;
-using Castle.Core.Internal;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
@@ -13,6 +13,8 @@ namespace API_Lawyer.Assets.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [RequireAuthentication]
+    [Authorize(Policy = "standard")]
     public class CrawlerController : ControllerBase
     {
         private readonly CrawlerClient _crawler;
@@ -23,7 +25,7 @@ namespace API_Lawyer.Assets.Controllers
             _service = service;
         }
 
-
+        /// <summary> Busca a página do processo inserido em formato JSON </summary>
         [HttpGet("/search/{numeroProcesso}")]
         public async Task<IActionResult> SearchPage(string numeroProcesso)
         {
@@ -31,7 +33,7 @@ namespace API_Lawyer.Assets.Controllers
             return Ok(page);    
         }
 
-        /// <summary> Adiciona uma consulta ao banco de dados </summary>
+        /// <summary> Busca na WEB o processo e salva seus dados na base de dados </summary>
         [HttpPost("/salvar/pagina/database/{numeroProcesso}")]
         public async Task<IActionResult> SavePage(string numeroProcesso)
         {

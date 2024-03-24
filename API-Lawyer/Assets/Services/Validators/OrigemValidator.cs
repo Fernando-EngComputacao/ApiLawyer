@@ -7,8 +7,8 @@ namespace API_Lawyer.Assets.Services.Validators
 {
     public class OrigemValidator : AbstractValidator<CreateOrigemDTO>
     {
-        private readonly LawyerContext _context;
-        public OrigemValidator(LawyerContext context)
+        private readonly LawyerDbContext _context;
+        public OrigemValidator(LawyerDbContext context)
         {
             _context = context;
 

@@ -13,11 +13,11 @@ namespace API_Lawyer.Assets.Services
     public class OrigemService : IOrigemService
     {
 
-        private readonly LawyerContext _context;
+        private readonly LawyerDbContext _context;
         private readonly IMapper _mapper;
         private readonly OrigemValidator _validator;
 
-        public OrigemService(LawyerContext context, IMapper mapper, OrigemValidator validator)
+        public OrigemService(LawyerDbContext context, IMapper mapper, OrigemValidator validator)
         {
             _context = context;
             _mapper = mapper;

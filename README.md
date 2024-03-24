@@ -2,7 +2,7 @@
 
 LawyerAPI é um projeto no qual dados do site do Segundo Grau do Tribunal de Justiça da BA, dado um processo X, é raspado e obtidos em formato JSON. Esses dados são gravados na base de dados, MySQL. 
 
-Para acesso direto e gestão destes dados uma API REST é utilizada com a atuação os verbos HTTP (CRUD).
+Para acesso direto e gestão destes dados uma API REST é utilizada com a atuação os verbos HTTP (CRUD), com controle de usuário.
 
 Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-end desta aplicação.
 
@@ -17,6 +17,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 - [x] Crawler do Site Tribunal de Justiça do Estado da Bahia
 - [x] Integração dos CRUDs com a base de dados
 - [x] Integração do Crawler com a base de dados
+- [x] Controle de Usuário
 
 ---
 
@@ -29,6 +30,8 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 - [x] Utilização de Crawler
 - [x] Validação Técnica de Recurso
 - [x] Validação de Negócio
+- [x] Autenticação de Usuário
+- [x] Camada de Proteção de acesso à API
 
 
 --- 
@@ -39,12 +42,15 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 - [x] Pomelo.EntityFrameworkCore.MySql 6.0.2
 - [x] Microsoft.EntityFrameworkCore.Proxies 6.0.14
 - [x] Microsoft.AspNetCore.Mvc.NewtonsoftJson 6.0.14
-- [x] Microsoft.Extensions.Identity.Stores 6.0.14
-- [x] Swashbuckle.AspNetCore.SwaggerGen 6.2.3
-- [x] Swashbuckle.AspNetCore.SwaggerUI 6.5.2
+- [x] Microsoft.AspNetCore.Authentication.JwtBearer 8.0.3
+- [x] Microsoft.AspNetCore.Identity.EntityFrameWorkCore 6.0.14
 - [x] System.IdentityModel.Tokens.ValidatingIssuerNameRegistry 4.5.1
 - [x] AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.0
+- [x] Microsoft.Extensions.Identity.Stores 6.0.14
 - [x] Swashbuckle.AspNetCore.Annotations 6.0.1
+- [x] Swashbuckle.AspNetCore.SwaggerGen 6.2.3
+- [x] Swashbuckle.AspNetCore.SwaggerUI 6.5.2
+- [X] System.IdentityModel.Tokens.Jwt 7.4.1
 - [x] System.Text.RegularExpressions 4.3.1
 - [x] FluentValidation.AspNetCore 10.3.0
 - [x] Microsoft.Identity.Client 4.50.0
@@ -77,19 +83,57 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 
 ---
 
+## :lock: Autenticação de Usuário
+#### - Migrations
+##### - Especifique qual o contexto que irá rodar para a base de dados _(faça o mesmo para LawyerDbContext)_:
+
+- Para criar a base de dados do Usuário para autenticação, use:
+
+  Add-Migration CreateUserTable -Context UsuarioDbContext
+
+- Para atualizar a base de dados do Usuário também é necessário utilizar o contexto, use:
+
+  Update-Database -Context UsuarioDbContext
+
+### - Cadastro de Usuário
+#### - Exemplo para cadastro de usuário _(a senha deve ter letra maiúscula, minúscula, número e caracter especial)_:
+```
+{
+  "Username": "root",
+  "Email": "root@mail.com",
+  "DataNascimento": "2024-02-23T16:13:43.323Z",
+  "Password": "@Senha123!",
+  "RePassword": "@Senha123!"
+}
+```
+
+### - Logar Usuário (Autenticação) -> Retorna um Token Bearer
+#### - Exemplo de login de usuário, do usuário cadastrado acima.
+```
+{
+  "Username": "root",
+  "Password": "@Senha123!"
+}
+```
+
+### - Swagger
+#### - Pegue o Token obtido ao logar usuário _(passo anterior)_ e coloque no "[Autorize 🔓]" presente na página do Swagger _(canto direito superior)_.
+
+---
+
 ## :star: Orientações Adicionais
 #### - Orientações Adicionais
 ###### - Para criar as Migrations, use o comando abaixo:
 
-    Add-Migration <NomeDaMigration>
+    Add-Migration <NomeDaMigration> -Context <Name>DbContext
 
-Exemplo: 
+- Exemplo: 
 
-    Add-Migration CriacaoTabelaUsuario
+    Add-Migration CriacaoTabelaUsuario -Context LawyerDbContext
 
 ###### - Após criada a Migratoion, use o comando abaixo para atualizar a base de dados:
 
-    Update-Database
+    Update-Database -Context LawyerDbContext
         
 ###### - Outros comandos úteis para Migrations
  - List-Migrations: lista todas as migrações existentes.
