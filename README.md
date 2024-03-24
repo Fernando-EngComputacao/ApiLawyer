@@ -112,7 +112,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 ```
 
 ### - Logar Usuário (Autenticação) -> Retorna um Token Bearer
-#### - Exemplo de login de usuário, do usuário cadastrado acima.
+#### - Exemplo de login de usuário, do cadastro acima.
 ```
 {
   "Username": "root",
