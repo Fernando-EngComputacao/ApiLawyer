@@ -45,7 +45,7 @@ namespace API_Lawyer.Assets.Client
                         }
                     }
                 }
-                //ProcessoJson(result);
+                ProcessoJson(result);
                 return result;
             }
         }
@@ -73,21 +73,21 @@ namespace API_Lawyer.Assets.Client
                        switch(count)
                         {
                             case 0:
-                                processo.Add("NumeroProcesso", dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)]);
+                                processo["NumeroProcesso" ]= dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)];
                                 break;
                             case 2:
-                            processo.Add(valores[count], dado["Info_" + (int.Parse(kv.Key.Substring(5)))].Substring(6));
-                            break;
-                        case 6:
-                            processo.Add(valores[count], dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)].Substring(0,1));
-                            break;
-                        default:
-                            processo.Add(valores[count], dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)]);
-                            break;
+                                processo[valores[count]] = dado["Info_" + (int.Parse(kv.Key.Substring(5)))].Substring(6);
+                                break;
+                            case 6:
+                                processo[valores[count]] = dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)].Substring(0,1);
+                                break;
+                            default:
+                                processo[valores[count]] = dado["Info_" + (int.Parse(kv.Key.Substring(5)) + 1)];
+                                break;
                     }
                 });
             }
-            //Console.WriteLine($"\n {JsonConvert.SerializeObject(processo, Formatting.Indented)}");
+            Console.WriteLine($"\n {JsonConvert.SerializeObject(processo, Formatting.Indented)}");
             return processo;
         }
 

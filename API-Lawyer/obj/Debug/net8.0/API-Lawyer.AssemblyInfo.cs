@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("API-Lawyer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1495069b670005c23fc06ec53bb1a4af8e025c9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c43e3e9901d7c1869f2912be173074047e833db")]
 [assembly: System.Reflection.AssemblyProductAttribute("API-Lawyer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("API-Lawyer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

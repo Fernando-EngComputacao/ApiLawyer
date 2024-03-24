@@ -8,7 +8,7 @@
             <summary> 🔑 Autentica um usuário (login) + 🔓 LIVRE de Autenticação  </summary>
         </member>
         <member name="M:API_Lawyer.Assets.Controllers.CrawlerController.SearchPage(System.String)">
-            <summary> Busca a página do processo inserido em formato JSON </summary>
+            <summary> Busca a página do processo e converte em formato JSON </summary>
         </member>
         <member name="M:API_Lawyer.Assets.Controllers.CrawlerController.SavePage(System.String)">
             <summary> Busca na WEB o processo e salva seus dados na base de dados </summary>
