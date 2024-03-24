@@ -1,6 +1,6 @@
 ﻿## 💻 Sobre o projeto
 
-LawyerAPI é um projeto no qual dados do site do Segundo Grau do Tribunal de Justiça da BA, dado um processo, 0809979-67.2015.8.05.0080, é raspado e obtidos em formato JSON. Esses dados são gravados na base de dados, MySQL. 
+LawyerAPI é um projeto no qual dados do site do Segundo Grau do Tribunal de Justiça da BA, dado um processo X, é raspado e obtidos em formato JSON. Esses dados são gravados na base de dados, MySQL. 
 
 Para acesso direto e gestão destes dados uma API REST é utilizada com a atuação os verbos HTTP (CRUD), com controle de usuário.
 
@@ -122,6 +122,31 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 
 ### - Swagger
 #### - Pegue o Token obtido ao logar usuário _(passo anterior)_ e coloque no "[Autorize 🔓]" presente na página do Swagger _(canto superior direito)_.
+
+---
+
+### :beetle: Teste
+#### - Números de processos para testagem:
+
+```
+0809979-67.2015.8.05.0080
+```
+
+```
+0568155-53.2018.8.05.0001
+```
+
+```
+0023111-47.2013.8.05.0000
+```
+
+```
+0072739-51.2003.8.05.0001
+```
+
+```
+0092684-82.2007.8.05.0001
+```
 
 ---
 
