@@ -1,6 +1,6 @@
 ﻿## 💻 Sobre o projeto
 
-LawyerAPI é um projeto no qual dados do site do Segundo Grau do Tribunal de Justiça da BA, dado um processo X, é raspado e obtidos em formato JSON. Esses dados são gravados na base de dados, MySQL. 
+LawyerAPI é um projeto no qual dados do site do Segundo Grau do Tribunal de Justiça da BA, dado um processo, 0809979-67.2015.8.05.0080, é raspado e obtidos em formato JSON. Esses dados são gravados na base de dados, MySQL. 
 
 Para acesso direto e gestão destes dados uma API REST é utilizada com a atuação os verbos HTTP (CRUD), com controle de usuário.
 
