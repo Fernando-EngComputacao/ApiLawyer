@@ -89,11 +89,15 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 
 - Para criar a base de dados do Usuário para autenticação, use:
 
+```
   Add-Migration CreateUserTable -Context UsuarioDbContext
+```
 
 - Para atualizar a base de dados do Usuário também é necessário utilizar o contexto, use:
 
+```
   Update-Database -Context UsuarioDbContext
+```
 
 ### - Cadastro de Usuário
 #### - Exemplo para cadastro de usuário _(a senha deve ter letra maiúscula, minúscula, número e caracter especial)_:
@@ -117,7 +121,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 ```
 
 ### - Swagger
-#### - Pegue o Token obtido ao logar usuário _(passo anterior)_ e coloque no "[Autorize 🔓]" presente na página do Swagger _(canto direito superior)_.
+#### - Pegue o Token obtido ao logar usuário _(passo anterior)_ e coloque no "[Autorize 🔓]" presente na página do Swagger _(canto superior direito)_.
 
 ---
 
