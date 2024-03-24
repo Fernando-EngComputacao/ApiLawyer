@@ -107,11 +107,10 @@ builder.Services.AddAuthentication(opts =>
 {
     opts.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuerSigningKey = true,
-        ValidateLifetime = true,
+        ValidateIssuerSigningKey = false,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("AERTHJIHGFDER567YTFDY876GE44R5TT6YYY77U")),
-        ValidateAudience = true,
-        ValidateIssuer = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
         ClockSkew = TimeSpan.Zero
     };
 }

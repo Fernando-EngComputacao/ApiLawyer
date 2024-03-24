@@ -33,7 +33,7 @@ namespace API_Lawyer.Assets.Services.Validators
         }
         private bool ValidateCredentials(string username, string password)
         {
-            return _signInManager.PasswordSignInAsync(username, password, false, false).Result.Succeeded;
+                return _signInManager.PasswordSignInAsync(username, password, false, false).Result.Succeeded;
         }
     }
 }
