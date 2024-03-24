@@ -25,7 +25,7 @@ namespace API_Lawyer.Assets.Controllers
             _service = service;
         }
 
-        /// <summary> Busca a página do processo inserido em formato JSON </summary>
+        /// <summary> Busca a página do processo e converte em formato JSON </summary>
         [HttpGet("/search/{numeroProcesso}")]
         public async Task<IActionResult> SearchPage(string numeroProcesso)
         {
