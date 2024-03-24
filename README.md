@@ -125,7 +125,7 @@ Frente à isso, este projeto objetiva com o uso de Crawler e .NET, fazer o back-
 
 ---
 
-### :beetle: Teste
+### :beetle: Testes de Função
 #### - Números de processos para testagem:
 
 ```
